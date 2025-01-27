@@ -13,8 +13,10 @@ public class BENomDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.Entity<User>().HasKey(u => u.Id);
-        modelBuilder.Entity<User>().Property(u => u.Username).IsRequired().HasMaxLength(100);
-        modelBuilder.Entity<User>().Property(u => u.PasswordHash).IsRequired();
+        modelBuilder.Entity<User>().HasKey(u => u.id);
+        modelBuilder.Entity<User>().Property(u => u.id_cat_role).IsRequired();
+        modelBuilder.Entity<User>().Property(u => u.employee_number).IsRequired().HasMaxLength(6);
+        modelBuilder.Entity<User>().Property(u => u.email).IsRequired().HasMaxLength(100);
+        modelBuilder.Entity<User>().Property(u => u.password).IsRequired();
     }
 }

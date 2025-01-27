@@ -56,22 +56,22 @@ using (var scope = app.Services.CreateScope())
 }
 
 // Endpoint para registrar usuarios
-/* app.MapPost("/register", async (User user, BENomDbContext db) =>
+app.MapPost("/register", async (User user, BENomDbContext db) =>
 {
-    if (await db.Users.AnyAsync(u => u.Username == user.Username))
+    if (await db.Users.AnyAsync(u => u.employee_number == user.employee_number))
         return Results.BadRequest("El usuario ya existe.");
 
-    user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(user.PasswordHash);
+    user.password = BCrypt.Net.BCrypt.HashPassword(user.password);
     db.Users.Add(user);
     await db.SaveChangesAsync();
     return Results.Ok("Usuario registrado con éxito.");
-}); */
+});
 
 // Endpoint para autenticar usuarios
 app.MapPost("/login", async (User user, BENomDbContext db) =>
 {
-    var existingUser = await db.Users.FirstOrDefaultAsync(u => u.Username == user.Username);
-    if (existingUser == null || !BCrypt.Net.BCrypt.Verify(user.PasswordHash, existingUser.PasswordHash))
+    var existingUser = await db.Users.FirstOrDefaultAsync(u => u.employee_number == user.employee_number);
+    if (existingUser == null || !BCrypt.Net.BCrypt.Verify(user.password, existingUser.password))
         return Results.Unauthorized();
 
     var tokenHandler = new System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler();
@@ -79,8 +79,8 @@ app.MapPost("/login", async (User user, BENomDbContext db) =>
     {
         Subject = new System.Security.Claims.ClaimsIdentity(new[]
         {
-            new System.Security.Claims.Claim("id", existingUser.Id.ToString()),
-            new System.Security.Claims.Claim("role", existingUser.Role)
+            new System.Security.Claims.Claim("id", existingUser.id.ToString()),
+            new System.Security.Claims.Claim("role", existingUser.id_cat_role.ToString())
         }),
         Expires = DateTime.UtcNow.AddHours(1),
         Issuer = jwtIssuer,

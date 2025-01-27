@@ -34,6 +34,7 @@ C:\Users\jose_arambul\Proyectos\NOM\BENom\obj\Debug\net9.0\BENom.AssemblyInfo.cs
 C:\Users\jose_arambul\Proyectos\NOM\BENom\obj\Debug\net9.0\BENom.csproj.CoreCompileInputs.cache
 C:\Users\jose_arambul\Proyectos\NOM\BENom\obj\Debug\net9.0\BENom.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\jose_arambul\Proyectos\NOM\BENom\obj\Debug\net9.0\BENom.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\jose_arambul\Proyectos\NOM\BENom\obj\Debug\net9.0\BENom.sourcelink.json
 C:\Users\jose_arambul\Proyectos\NOM\BENom\obj\Debug\net9.0\scopedcss\bundle\BENom.styles.css
 C:\Users\jose_arambul\Proyectos\NOM\BENom\obj\Debug\net9.0\staticwebassets.build.json
 C:\Users\jose_arambul\Proyectos\NOM\BENom\obj\Debug\net9.0\staticwebassets.development.json
