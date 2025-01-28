@@ -13,6 +13,7 @@ public class BENomDbContext : DbContext
     public DbSet<Sublocation> Sublocations { get; set; }
     public DbSet<Witness> Witnesses { get; set; }
     public DbSet<Request> Requests { get; set; }
+    public DbSet<Requester> Requesters { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
