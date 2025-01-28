@@ -9,73 +9,73 @@ namespace BENom.Controllers
     [Route("api/[controller]")]
     [ApiController]
     /* [Authorize(Roles = "Admin")] */ // Protege todos los endpoints para usuarios con rol "Admin"
-    public class LocationsController : ControllerBase
+    public class RequestsController : ControllerBase
     {
     private readonly BENomDbContext _context;
 
-        public LocationsController(BENomDbContext context)
+        public RequestsController(BENomDbContext context)
         {
             _context = context;
         }
 
         // Obtener todos los objetos
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Location>>> GetLocations()
+        public async Task<ActionResult<IEnumerable<Request>>> GetRequests()
         {
-            return await _context.Locations.ToListAsync();
+            return await _context.Requests.ToListAsync();
         }
 
         // Obtener un objeto por ID
         [HttpGet("{id}")]
-        public async Task<ActionResult<Location>> GetLocation(int id)
+        public async Task<ActionResult<Request>> GetRequest(int id)
         {
-            var location = await _context.Locations.FindAsync(id);
+            var request = await _context.Requests.FindAsync(id);
 
-            if (location == null)
+            if (request == null)
             {
                 return NotFound();
             }
 
-            return location;
+            return request;
         }
 
         // Crear un nuevo objeto
         [HttpPost]
-        public async Task<ActionResult<Location>> PostLocation(Location location)
+        public async Task<ActionResult<Request>> PostRequest(Request request)
         {
-            _context.Locations.Add(location);
+            _context.Requests.Add(request);
             await _context.SaveChangesAsync();
             
-            return CreatedAtAction(nameof(GetLocation), new { id = location.id }, location);
+            return CreatedAtAction(nameof(GetRequest), new { id = request.id }, request);
         }
 
         // Actualizar un objeto
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutLocation(int id, Location location)
+        public async Task<IActionResult> PutRequest(int id, Request request)
         {
-            if (id != location.id)
+            if (id != request.id)
             {
                 return BadRequest("El ID del objeto no coincide.");
             }
 
-            _context.Entry(location).State = EntityState.Modified;
+            _context.Entry(request).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
-            return Ok(location);
+            return Ok(request);
         }
 
         // Eliminar un objeto
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteLocation(int id)
+        public async Task<IActionResult> DeleteRequest(int id)
         {
-            var location = await _context.Locations.FindAsync(id);
+            var request = await _context.Requests.FindAsync(id);
 
-            if (location == null)
+            if (request == null)
             {
                 return NotFound();
             }
 
-            _context.Locations.Remove(location);
+            _context.Requests.Remove(request);
             await _context.SaveChangesAsync();
 
             return NoContent();

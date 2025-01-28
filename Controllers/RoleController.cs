@@ -55,7 +55,7 @@ namespace BENom.Controllers
         {
             if (id != role.id)
             {
-                return BadRequest("El ID del producto no coincide.");
+                return BadRequest("El ID del objeto no coincide.");
             }
 
             _context.Entry(role).State = EntityState.Modified;
