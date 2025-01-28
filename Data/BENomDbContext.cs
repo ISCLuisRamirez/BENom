@@ -8,6 +8,7 @@ public class BENomDbContext : DbContext
     public BENomDbContext(DbContextOptions<BENomDbContext> options) : base(options) { }
 
     public DbSet<User> Users { get; set; }
+    public DbSet<Role> Roles { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

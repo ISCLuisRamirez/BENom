@@ -14,6 +14,7 @@ builder.Services.AddDbContext<BENomDbContext>(options =>
         new MySqlServerVersion(new Version(8, 0, 32))));
 
 builder.Services.AddAuthorization();
+builder.Services.AddControllers();
 
 // Configuración de JWT
 var jwtKey = builder.Configuration["Jwt:Key"];
@@ -54,6 +55,8 @@ using (var scope = app.Services.CreateScope())
     var db = scope.ServiceProvider.GetRequiredService<BENomDbContext>();
     db.Database.EnsureCreated();
 }
+
+app.MapControllers();
 
 // Endpoint para registrar usuarios
 app.MapPost("/register", async (User user, BENomDbContext db) =>
