@@ -11,6 +11,7 @@ public class BENomDbContext : DbContext
     public DbSet<Role> Roles { get; set; }
     public DbSet<Location> Locations { get; set; }
     public DbSet<Sublocation> Sublocations { get; set; }
+    public DbSet<Witness> Witnesses { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
