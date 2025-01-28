@@ -55,13 +55,13 @@ namespace BENom.Controllers
         {
             if (id != role.id)
             {
-                return BadRequest();
+                return BadRequest("El ID del producto no coincide.");
             }
 
             _context.Entry(role).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok(role);
         }
 
         // Eliminar un rol
