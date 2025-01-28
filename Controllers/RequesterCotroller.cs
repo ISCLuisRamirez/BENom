@@ -78,7 +78,7 @@ namespace BENom.Controllers
             _context.Requesters.Remove(requester);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return Content("Objeto eliminado");
         }
     }
 }
