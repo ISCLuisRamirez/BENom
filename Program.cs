@@ -83,7 +83,7 @@ app.MapPost("/login", async (User user, BENomDbContext db) =>
         Subject = new System.Security.Claims.ClaimsIdentity(new[]
         {
             new System.Security.Claims.Claim("id", existingUser.id.ToString()),
-            new System.Security.Claims.Claim("role", existingUser.id_cat_role.ToString())
+            new System.Security.Claims.Claim("role", existingUser.id_role.ToString())
         }),
         Expires = DateTime.UtcNow.AddHours(1),
         Issuer = jwtIssuer,

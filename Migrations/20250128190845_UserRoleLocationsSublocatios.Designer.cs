@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BENom.Migrations
 {
     [DbContext(typeof(BENomDbContext))]
-    [Migration("20250127212413_RoleModel")]
-    partial class RoleModel
+    [Migration("20250128190845_UserRoleLocationsSublocatios")]
+    partial class UserRoleLocationsSublocatios
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -19,6 +19,21 @@ namespace BENom.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "6.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
+
+            modelBuilder.Entity("BENom.Models.Location", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("location_name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Locations");
+                });
 
             modelBuilder.Entity("BENom.Models.Role", b =>
                 {
@@ -33,6 +48,24 @@ namespace BENom.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Roles");
+                });
+
+            modelBuilder.Entity("BENom.Models.Sublocation", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("id_location")
+                        .HasColumnType("int");
+
+                    b.Property<string>("sublocation_name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Sublocations");
                 });
 
             modelBuilder.Entity("BENom.Models.User", b =>
@@ -51,7 +84,7 @@ namespace BENom.Migrations
                         .HasMaxLength(6)
                         .HasColumnType("varchar(6)");
 
-                    b.Property<int>("id_cat_role")
+                    b.Property<int>("id_role")
                         .HasColumnType("int");
 
                     b.Property<string>("password")

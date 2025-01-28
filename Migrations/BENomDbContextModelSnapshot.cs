@@ -48,6 +48,24 @@ namespace BENom.Migrations
                     b.ToTable("Roles");
                 });
 
+            modelBuilder.Entity("BENom.Models.Sublocation", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("id_location")
+                        .HasColumnType("int");
+
+                    b.Property<string>("sublocation_name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Sublocations");
+                });
+
             modelBuilder.Entity("BENom.Models.User", b =>
                 {
                     b.Property<int>("id")
@@ -64,7 +82,7 @@ namespace BENom.Migrations
                         .HasMaxLength(6)
                         .HasColumnType("varchar(6)");
 
-                    b.Property<int>("id_cat_role")
+                    b.Property<int>("id_role")
                         .HasColumnType("int");
 
                     b.Property<string>("password")
