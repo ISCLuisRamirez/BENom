@@ -9,6 +9,7 @@ public class BENomDbContext : DbContext
 
     public DbSet<User> Users { get; set; }
     public DbSet<Role> Roles { get; set; }
+    public DbSet<Location> Locations { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
