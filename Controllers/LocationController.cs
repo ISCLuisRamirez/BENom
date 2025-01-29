@@ -2,13 +2,13 @@ using BENom.Data;
 using BENom.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-/* using Microsoft.AspNetCore.Authorization; */ // Descomenta esta linea para proteger con authenticate 
+using Microsoft.AspNetCore.Authorization; // Esta linea para proteger con authenticate 
 
 namespace BENom.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    /* [Authorize(Roles = "Admin")] */ // Protege todos los endpoints para usuarios con rol "Admin"
+    [Authorize(Roles = "Admin")] // Solo usuarios con rol "Admin" pueden acceder a estos endpoints
     public class LocationsController : ControllerBase
     {
     private readonly BENomDbContext _context;

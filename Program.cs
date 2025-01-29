@@ -7,6 +7,22 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Configurar CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+
+        // Agregar parametros para producción //
+        /* policy.WithOrigins("https://example.com")
+            .AllowAnyMethod()
+            .AllowAnyHeader(); */
+    });
+});
+
 // Configuración de la base de datos MySQL
 builder.Services.AddDbContext<BENomDbContext>(options =>
     options.UseMySql(
@@ -45,6 +61,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// Habilitar CORS
+app.UseCors("AllowAll");
 
 app.UseAuthentication();
 app.UseAuthorization();
