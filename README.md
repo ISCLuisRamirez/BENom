@@ -1,5 +1,10 @@
 <div style="display: inline-block; padding: 0px 10px;" align="center">
     <img src="https://miro.medium.com/v2/resize:fit:1024/1*3391_Gz2SDKmo50hWvzfUg.png" width="50" height="50">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdsG4xl7qSs8fhWW5uUMKqTZbf4N74-mTYLw&s" width="50" height="50">
+    <img src="https://w7.pngwing.com/pngs/799/395/png-transparent-microsoft-sharepoint-logo-thumbnail.png" width="50" height="50">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGp2RKrzqJF2Cu3dxnk2RGK_F7SSloJG-Wyw&s" width="50" height="50">
+    <img src="https://images.seeklogo.com/logo-png/27/2/github-logo-png_seeklogo-273183.png" width="50" height="50">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Visual_Studio_Code_1.35_icon.svg/2048px-Visual_Studio_Code_1.35_icon.svg.png" width="50" height="50">
 </div>
 
 ## For development (Localhost)
