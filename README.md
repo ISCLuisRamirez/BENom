@@ -1,1 +1,45 @@
-# BENom
+<div style="display: inline-block; padding: 0px 10px;" align="center">
+    <img src="https://miro.medium.com/v2/resize:fit:1024/1*3391_Gz2SDKmo50hWvzfUg.png" width="50" height="50">
+</div>
+
+## For development (Localhost)
+
+Dowonload and install all dependency and follow the steps.
+
+1) Downloads
+
+    - [.Net SDK 9.0.102](https://dotnet.microsoft.com/es-es/download/dotnet/9.0)
+
+    - [MySQL Community 9.1.0](https://downloads.mysql.com/archives/community/)
+
+    - [GIT Lastest](https://git-scm.com/downloads)
+    
+    Cloud for all documents
+    - [SharePoint](#)
+
+    We recommend use Visual Studio Code IDE
+    - [Visual Studio Code (lastest version)](https://code.visualstudio.com/download).
+
+    For testing Back End API's
+    - [Postaman (lastest version)](https://www.postman.com/downloads/).
+
+2) After installations, run MySQL Workbench on localhost.
+
+3) Make sure don't have a database created "nom_db"
+
+3) Clone this repository on your pc
+
+        $ git clone https://github.com/ISCLuisRamirez/BENom.git
+
+    switch to "develop" branch 
+
+        $ git checkout develop
+
+    or make it local
+
+        $ git branch develop -m
+
+    last pull from origin
+
+        $ git pull origin develop
+
