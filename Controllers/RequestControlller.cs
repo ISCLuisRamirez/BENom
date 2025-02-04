@@ -8,7 +8,7 @@ namespace BENom.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "Admin")] // Solo usuarios con rol "Admin" pueden acceder a estos endpoints
+    /* [Authorize(Roles = "Admin")] */ // Solo usuarios con rol "Admin" pueden acceder a estos endpoints
     public class RequestsController : ControllerBase
     {
     private readonly BENomDbContext _context;
@@ -26,27 +26,34 @@ namespace BENom.Controllers
         }
 
         // Obtener un objeto por ID
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Request>> GetRequest(int id)
+        [HttpGet("search")]
+        public async Task<ActionResult<Request>> GetRequestAsync([FromQuery] string folio, [FromQuery] string password, BENomDbContext db)
         {
-            var request = await _context.Requests.FindAsync(id);
 
-            if (request == null)
-            {
-                return NotFound();
-            }
+            var Request = await db.Requests.FirstOrDefaultAsync(r => r.folio == folio);
 
-            return request;
+            if (Request == null || !BCrypt.Net.BCrypt.Verify(password, Request.password))
+                return NotFound("No hay registro");
+
+           return Ok(Request.status);
         }
 
         // Crear un nuevo objeto
         [HttpPost]
         public async Task<ActionResult<Request>> PostRequest(Request request)
         {
+            string Folio = FolioGenerator();
+            request.folio = Folio;
+            string Password = PassGenerator(6);
+            request.password = BCrypt.Net.BCrypt.HashPassword(Password);
+
             _context.Requests.Add(request);
             await _context.SaveChangesAsync();
-            
-            return CreatedAtAction(nameof(GetRequest), new { id = request.id }, request);
+            return Ok(new { 
+                Folio,
+                Password
+            });
+            /* return CreatedAtAction(nameof(GetRequest), new { id = request.id }, request); */
         }
 
         // Actualizar un objeto
@@ -79,6 +86,27 @@ namespace BENom.Controllers
             await _context.SaveChangesAsync();
 
             return Content("Objeto eliminado");
+        }
+
+        static string FolioGenerator()
+        {
+            Random random = new Random();
+            int folio = random.Next(100000, 1000000); // Asegura 6 dígitos
+            return folio.ToString();
+        }
+
+        static string PassGenerator(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            Random random = new Random();
+            char[] pass = new char[length];
+
+            for (int i = 0; i < length; i++)
+            {
+                pass[i] = chars[random.Next(chars.Length)];
+            }
+
+            return new string(pass);
         }
     }
 }
