@@ -47,3 +47,9 @@ Dowonload and install all dependency and follow the steps.
 
         $ git pull origin develop
 
+4) Install all dependencies on the project
+
+        $ dotnet add package Microsoft.EntityFrameworkCore --version 6.0
+        $ dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 6.0
+        $ dotnet add package Microsoft.EntityFrameworkCore.Tools --version 6.0
+        $ dotnet add package Pomelo.EntityFrameworkCore.MySql --version 6.0
