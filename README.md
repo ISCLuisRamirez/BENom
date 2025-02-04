@@ -47,9 +47,36 @@ Dowonload and install all dependency and follow the steps.
 
         $ git pull origin develop
 
+4) Create file appsettings.json on "/" with the data of the database 
+
+        ${
+        $    "ConnectionStrings": {
+        $        "DefaultConnection": "server=localhost;port=3306;database=nom_db;user=YOURLOCALUSER;password=YOURLOCALDATABASEPASSWORD"
+        $    },
+        $    "Jwt": {
+        $        "Key": "C97cWeuVUvDwqMdRBC+fzo4Egiz2qE95KtWVSVQM0hI=",
+        $        "Issuer": "BENom"
+        $    },
+        $    "Logging": {
+        $        "LogLevel": {
+        $        "Default": "Information",
+        $        "Microsoft.AspNetCore": "Warning"
+        $        }
+        $    },
+        $    "AllowedHosts": "*"
+        $}
+
+4) Install EntityFramework Tool
+
+        $ dotnet tool install --global dotnet-ef
+
 4) Install all dependencies on the project
 
         $ dotnet add package Microsoft.EntityFrameworkCore --version 6.0
         $ dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 6.0
         $ dotnet add package Microsoft.EntityFrameworkCore.Tools --version 6.0
         $ dotnet add package Pomelo.EntityFrameworkCore.MySql --version 6.0
+
+5) Execute on terminal
+
+        $ dotnet build
