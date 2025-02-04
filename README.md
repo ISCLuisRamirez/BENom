@@ -31,7 +31,7 @@ Dowonload and install all dependency and follow the steps.
 
 3) Make sure don't have a database created "nom_db"
 
-3) Clone this repository on your pc
+4) Clone this repository on your pc
 
         $ git clone https://github.com/ISCLuisRamirez/BENom.git
 
@@ -47,36 +47,40 @@ Dowonload and install all dependency and follow the steps.
 
         $ git pull origin develop
 
-4) Create file appsettings.json on "/" with the data of the database 
+5) Create file appsettings.json on "/" with the data of the database 
 
-        ${
-        $    "ConnectionStrings": {
-        $        "DefaultConnection": "server=localhost;port=3306;database=nom_db;user=YOURLOCALUSER;password=YOURLOCALDATABASEPASSWORD"
-        $    },
-        $    "Jwt": {
-        $        "Key": "C97cWeuVUvDwqMdRBC+fzo4Egiz2qE95KtWVSVQM0hI=",
-        $        "Issuer": "BENom"
-        $    },
-        $    "Logging": {
-        $        "LogLevel": {
-        $        "Default": "Information",
-        $        "Microsoft.AspNetCore": "Warning"
-        $        }
-        $    },
-        $    "AllowedHosts": "*"
-        $}
+        {
+            "ConnectionStrings": {
+                "DefaultConnection": "server=localhost;port=3306;database=nom_db;user=YOURLOCALUSER;password=YOURLOCALDATABASEPASSWORD"
+            },
+            "Jwt": {
+                "Key": "C97cWeuVUvDwqMdRBC+fzo4Egiz2qE95KtWVSVQM0hI=",
+                "Issuer": "BENom"
+            },
+            "Logging": {
+                "LogLevel": {
+                "Default": "Information",
+                "Microsoft.AspNetCore": "Warning"
+                }
+            },
+            "AllowedHosts": "*"
+        }
 
-4) Install EntityFramework Tool
+6) Install EntityFramework Tool
 
         $ dotnet tool install --global dotnet-ef
 
-4) Install all dependencies on the project
+7) Install all dependencies on the project
 
         $ dotnet add package Microsoft.EntityFrameworkCore --version 6.0
         $ dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 6.0
         $ dotnet add package Microsoft.EntityFrameworkCore.Tools --version 6.0
         $ dotnet add package Pomelo.EntityFrameworkCore.MySql --version 6.0
 
-5) Execute on terminal
+8) Execute on terminal
 
         $ dotnet build
+
+9) To start the project
+
+        $ dotnet run
