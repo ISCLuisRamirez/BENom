@@ -114,17 +114,17 @@ app.MapPost("/login", async (User user, BENomDbContext db) =>
     var token = tokenHandler.CreateToken(tokenDescriptor);
     var tokenString = tokenHandler.WriteToken(token);
 
-    var RoleId = loginUser.id_role switch
+    var Role = loginUser.id_role switch
     {
-        1 => "admin",
-        2 => "comite",
-        3 => "capturista",
+        1 => "Admin",
+        2 => "Comite",
+        3 => "Capturista",
         _ => "Sin Rol"
     };
     
-    return Results.Ok(new { 
+    return Results.Ok(new {
         Id = loginUser.id,
-        RoleId,
+        Role,
         EmployNumber = loginUser.employee_number,
         Email = loginUser.email,
         Token = tokenString 

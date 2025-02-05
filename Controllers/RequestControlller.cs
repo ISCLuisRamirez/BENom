@@ -2,7 +2,8 @@ using BENom.Data;
 using BENom.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authorization; // Esta linea para proteger con authenticate 
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.VisualBasic; // Esta linea para proteger con authenticate 
 
 namespace BENom.Controllers
 {
@@ -11,7 +12,7 @@ namespace BENom.Controllers
     /* [Authorize(Roles = "Admin")] */ // Solo usuarios con rol "Admin" pueden acceder a estos endpoints
     public class RequestsController : ControllerBase
     {
-    private readonly BENomDbContext _context;
+        private readonly BENomDbContext _context;
 
         public RequestsController(BENomDbContext context)
         {
@@ -27,15 +28,15 @@ namespace BENom.Controllers
 
         // Obtener un objeto por ID
         [HttpGet("search")]
-        public async Task<ActionResult<Request>> GetRequestAsync([FromQuery] string folio, [FromQuery] string password, BENomDbContext db)
+        public async Task<ActionResult<object>> GetRequestAsync([FromQuery] string folio, [FromQuery] string password, BENomDbContext db)
         {
+            var request = await db.Requests.FirstOrDefaultAsync(r => r.folio == folio);
 
-            var Request = await db.Requests.FirstOrDefaultAsync(r => r.folio == folio);
-
-            if (Request == null || !BCrypt.Net.BCrypt.Verify(password, Request.password))
+            if (request == null || !BCrypt.Net.BCrypt.Verify(password, request.password))
                 return NotFound("No hay registro");
 
-           return Ok(Request.status);
+            var requestStatus = request.status;
+            return Ok(new { requestStatus }); // Se usa Ok() en lugar de Results.Ok()
         }
 
         // Crear un nuevo objeto
@@ -49,7 +50,8 @@ namespace BENom.Controllers
 
             _context.Requests.Add(request);
             await _context.SaveChangesAsync();
-            return Ok(new { 
+            return Ok(new
+            {
                 Folio,
                 Password
             });
