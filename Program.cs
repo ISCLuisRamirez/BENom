@@ -125,7 +125,7 @@ app.MapPost("/login", async (User user, BENomDbContext db) =>
     return Results.Ok(new {
         Id = loginUser.id,
         Role,
-        EmployNumber = loginUser.employee_number,
+        Employee_Number = loginUser.employee_number,
         Email = loginUser.email,
         Token = tokenString 
     });
