@@ -36,7 +36,7 @@ namespace BENom.Controllers
                 return NotFound("No hay registro");
 
             var requestStatus = request.status;
-            return Ok(new { requestStatus }); // Se usa Ok() en lugar de Results.Ok()
+            return Ok(new { requestStatus });
         }
 
         // Crear un nuevo objeto
@@ -55,7 +55,6 @@ namespace BENom.Controllers
                 Folio,
                 Password
             });
-            /* return CreatedAtAction(nameof(GetRequest), new { id = request.id }, request); */
         }
 
         // Actualizar un objeto

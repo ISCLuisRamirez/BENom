@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BENom")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e2d592bb29a20f28b76abc180ba4d6e2852d71c9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+43954fc099012b5b6d8b9f19f195c4d115598672")]
 [assembly: System.Reflection.AssemblyProductAttribute("BENom")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BENom")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -4,6 +4,7 @@ using BENom.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http.HttpResults;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -53,6 +54,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddSingleton<EmailService>();
 
 var app = builder.Build();
 
@@ -88,6 +90,35 @@ app.MapPost("/register", async (User user, BENomDbContext db) =>
     await db.SaveChangesAsync();
     return Results.Ok("Usuario registrado con éxito.");
 });
+
+// Endpoint para recuperación usuarios
+/* app.MapPost("/forgot", async (User user, BENomDbContext db) =>
+{
+    var forgotUser = await db.Users.FirstOrDefaultAsync(u => u.employee_number == user.employee_number);
+    
+    if (forgotUser != null){
+        int length = 8;
+
+        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!#$%&/()=?¡@";
+        Random random = new Random();
+        char[] pass = new char[length];
+
+        for (int i = 0; i < length; i++)
+        {
+            pass[i] = chars[random.Next(chars.Length)];
+        }
+        
+        string newPassword = new string(pass);
+
+        forgotUser.password = BCrypt.Net.BCrypt.HashPassword(newPassword);
+
+        db.Users.Update(forgotUser);
+        await db.SaveChangesAsync();
+        
+        return Results.Ok(forgotUser);
+    }
+    return Results.Ok(new string("ok"));
+}); */
 
 // Endpoint para autenticar usuarios
 app.MapPost("/login", async (User user, BENomDbContext db) =>

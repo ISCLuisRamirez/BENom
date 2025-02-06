@@ -72,10 +72,11 @@ Dowonload and install all dependency and follow the steps.
 
 7) Install all dependencies on the project
 
-        $ dotnet add package Microsoft.EntityFrameworkCore --version 6.0
-        $ dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 6.0
-        $ dotnet add package Microsoft.EntityFrameworkCore.Tools --version 6.0
-        $ dotnet add package Pomelo.EntityFrameworkCore.MySql --version 6.0
+        dotnet add package Microsoft.EntityFrameworkCore --version 6.0
+        dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 6.0
+        dotnet add package Microsoft.EntityFrameworkCore.Tools --version 6.0
+        dotnet add package Pomelo.EntityFrameworkCore.MySql --version 6.0
+        dotnet add package MailKit
 
 8) Execute on terminal
 
