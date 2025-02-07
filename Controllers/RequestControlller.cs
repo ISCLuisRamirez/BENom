@@ -21,9 +21,55 @@ namespace BENom.Controllers
 
         // Obtener todos los objetos
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Request>>> GetRequests()
+        public async Task<ActionResult<IEnumerable<Request>>> GetRequests([FromQuery] RequestFiltroDto filtro)
         {
-            return await _context.Requests.ToListAsync();
+            var query = _context.Requests.AsQueryable();
+
+            if (filtro.IdRequesters.HasValue)
+                query = query.Where(r => r.id_requesters == filtro.IdRequesters.Value);
+
+            if (filtro.IdReason.HasValue)
+                query = query.Where(r => r.id_reason == filtro.IdReason.Value);
+
+            if (filtro.IdLocation.HasValue)
+                query = query.Where(r => r.id_location == filtro.IdLocation.Value);
+
+            if (filtro.IdSublocation.HasValue)
+                query = query.Where(r => r.id_sublocation == filtro.IdSublocation.Value);
+
+            if (filtro.FechaDesde.HasValue)
+                query = query.Where(r => r.date >= filtro.FechaDesde.Value);
+
+            if (filtro.FechaHasta.HasValue)
+                query = query.Where(r => r.date <= filtro.FechaHasta.Value);
+
+            if (filtro.Status.HasValue)
+                query = query.Where(r => r.status == filtro.Status.Value);
+
+            if (!string.IsNullOrEmpty(filtro.Folio))
+                query = query.Where(r => r.folio.Contains(filtro.Folio));
+
+            var ordenarPor = filtro.OrdenarPor ?? "id";
+            bool ordenDesc = filtro.OrdenDesc;
+
+            query = ordenDesc
+                ? query.OrderByDescending(e => EF.Property<object>(e, ordenarPor))
+                : query.OrderBy(e => EF.Property<object>(e, ordenarPor));
+
+            int totalRegistros = await query.CountAsync();
+            var requests = await query
+                .Skip((filtro.Pagina - 1) * filtro.TamanoPagina)
+                .Take(filtro.TamanoPagina)
+                .ToListAsync();
+
+            return Ok(new
+            {
+                TotalRegistros = totalRegistros,
+                PaginaActual = filtro.Pagina,
+                TamanoPagina = filtro.TamanoPagina,
+                TotalPaginas = (int)Math.Ceiling((double)totalRegistros / filtro.TamanoPagina),
+                Datos = requests
+            });
         }
 
         // Obtener un objeto por ID
