@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BENom.Migrations
 {
     [DbContext(typeof(BENomDbContext))]
-    [Migration("20250128232201_SubjectModel")]
-    partial class SubjectModel
+    [Migration("20250210162422_AllScripts")]
+    partial class AllScripts
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -45,10 +45,6 @@ namespace BENom.Migrations
                     b.Property<DateOnly>("date")
                         .HasColumnType("date");
 
-                    b.Property<string>("file")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.Property<string>("folio")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -57,9 +53,6 @@ namespace BENom.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("id_reason")
-                        .HasColumnType("int");
-
-                    b.Property<int>("id_requesters")
                         .HasColumnType("int");
 
                     b.Property<int>("id_sublocation")
@@ -89,7 +82,8 @@ namespace BENom.Migrations
 
                     b.Property<string>("employee_number")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(6)
+                        .HasColumnType("varchar(6)");
 
                     b.Property<int>("id_request")
                         .HasColumnType("int");

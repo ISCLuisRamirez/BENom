@@ -43,10 +43,6 @@ namespace BENom.Migrations
                     b.Property<DateOnly>("date")
                         .HasColumnType("date");
 
-                    b.Property<string>("file")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.Property<string>("folio")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -55,9 +51,6 @@ namespace BENom.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("id_reason")
-                        .HasColumnType("int");
-
-                    b.Property<int>("id_requesters")
                         .HasColumnType("int");
 
                     b.Property<int>("id_sublocation")
@@ -87,7 +80,8 @@ namespace BENom.Migrations
 
                     b.Property<string>("employee_number")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasMaxLength(6)
+                        .HasColumnType("varchar(6)");
 
                     b.Property<int>("id_request")
                         .HasColumnType("int");

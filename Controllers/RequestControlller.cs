@@ -25,9 +25,6 @@ namespace BENom.Controllers
         {
             var query = _context.Requests.AsQueryable();
 
-            if (filtro.IdRequesters.HasValue)
-                query = query.Where(r => r.id_requesters == filtro.IdRequesters.Value);
-
             if (filtro.IdReason.HasValue)
                 query = query.Where(r => r.id_reason == filtro.IdReason.Value);
 

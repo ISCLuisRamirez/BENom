@@ -9,18 +9,18 @@ namespace BENom.Controllers
     [Route("api/[controller]")]
     [ApiController]
     /* [Authorize(Roles = "Admin")] */ // Protege todos los endpoints para usuarios con rol "Admin"
-    public class RequesterersController : ControllerBase
+    public class RequestersController : ControllerBase
     {
     private readonly BENomDbContext _context;
 
-        public RequesterersController(BENomDbContext context)
+        public RequestersController(BENomDbContext context)
         {
             _context = context;
         }
 
         // Obtener todos los objetos
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Requester>>> GetRequesterers()
+        public async Task<ActionResult<IEnumerable<Requester>>> GetRequesters()
         {
             return await _context.Requesters.ToListAsync();
         }
