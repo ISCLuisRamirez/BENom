@@ -109,8 +109,9 @@ namespace BENom.Controllers
 
             _context.Requests.Add(request);
             await _context.SaveChangesAsync();
-            return Ok(new
+            return CreatedAtAction(nameof(PostRequest), new { id = request.id }, new
             {
+                id = request.id,
                 Folio,
                 Password
             });
