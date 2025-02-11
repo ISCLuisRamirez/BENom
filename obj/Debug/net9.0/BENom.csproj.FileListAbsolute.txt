@@ -151,3 +151,6 @@ C:\Users\jose_arambul\Proyectos\NOM\BENom\bin\Debug\net9.0\appsettings.json
 C:\Users\jose_arambul\Proyectos\NOM\BENom\bin\Debug\net9.0\BouncyCastle.Cryptography.dll
 C:\Users\jose_arambul\Proyectos\NOM\BENom\bin\Debug\net9.0\MailKit.dll
 C:\Users\jose_arambul\Proyectos\NOM\BENom\bin\Debug\net9.0\MimeKit.dll
+C:\Users\isclu\FRAGUA\BENom\bin\Debug\net9.0\BouncyCastle.Cryptography.dll
+C:\Users\isclu\FRAGUA\BENom\bin\Debug\net9.0\MailKit.dll
+C:\Users\isclu\FRAGUA\BENom\bin\Debug\net9.0\MimeKit.dll
