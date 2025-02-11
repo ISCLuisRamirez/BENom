@@ -13,7 +13,7 @@ public class Request
     public string? name_sublocation { get; set; }
     public DateOnly? date { get; set; }
     public string? period { get; set; }
-    public string folio { get; set; } = string.Empty;
-    public string password { get; set; } = string.Empty;
+    public string? folio { get; set; } = string.Empty;
+    public string? password { get; set; } = string.Empty;
     public byte status { get; set; }
 }

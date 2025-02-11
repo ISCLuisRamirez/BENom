@@ -82,6 +82,22 @@ namespace BENom.Controllers
             return Ok(new { requestStatus });
         }
 
+        // Obtener un objeto por ID
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Request>> GetRequest(int id)
+        {
+            var request = await _context.Requests
+                .FromSqlRaw("SELECT * FROM Requests WHERE Id = {0} AND Status != 'Eliminado'", id)
+                .FirstOrDefaultAsync();
+
+            if (request == null)
+            {
+                return NotFound();
+            }
+
+            return request;
+        }
+
         // Crear un nuevo objeto
         [HttpPost]
         public async Task<ActionResult<Request>> PostRequest(Request request)
