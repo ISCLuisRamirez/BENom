@@ -164,6 +164,29 @@ namespace BENom.Controllers
             return Content("Objeto eliminado");
         }
 
+        [HttpPatch("{id}/status")]
+        public async Task<IActionResult> UpdateStatus(int id, [FromBody] int newStatus)
+        {
+            var request = await _context.Requests.FindAsync(id);
+
+            if (request == null)
+            {
+                return NotFound("No se encontró la solicitud con el ID especificado.");
+            }
+
+            request.status = newStatus;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+                return Ok(new { message = "Estado actualizado correctamente", request });
+            }
+            catch (DbUpdateException ex)
+            {
+                return StatusCode(500, "Error al actualizar el estado: " + ex.Message);
+            }
+        }
+
         static string FolioGenerator()
         {
             Random random = new Random();
