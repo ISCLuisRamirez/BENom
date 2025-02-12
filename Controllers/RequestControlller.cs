@@ -121,16 +121,31 @@ namespace BENom.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutRequest(int id, Request request)
         {
-            if (id != request.id)
+            if (request == null || id != request.id)
             {
-                return BadRequest("El ID del objeto no coincide.");
+                return BadRequest("El ID del objeto no coincide o la solicitud es inválida.");
             }
 
-            _context.Entry(request).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+            var existingRequest = await _context.Requests.FindAsync(id);
+            if (existingRequest == null)
+            {
+                return NotFound("No se encontró la solicitud con el ID especificado.");
+            }
 
-            return Ok(request);
+            // Actualizar solo los campos necesarios en lugar de marcar todo como modificado
+            existingRequest.status = request.status;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+                return Ok(existingRequest);
+            }
+            catch (DbUpdateException ex)
+            {
+                return StatusCode(500, "Error al actualizar la solicitud: " + ex.Message);
+            }
         }
+
 
         // Eliminar un objeto
         [HttpDelete("{id}")]
