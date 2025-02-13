@@ -124,9 +124,17 @@ app.MapPost("/register", async (User user, BENomDbContext db) =>
 app.MapPost("/login", async (User user, BENomDbContext db) =>
 {
     var loginUser = await db.Users.FirstOrDefaultAsync(u => u.employee_number == user.employee_number);
-    
+
     if (loginUser == null || !BCrypt.Net.BCrypt.Verify(user.password, loginUser.password))
         return Results.Unauthorized();
+    
+    var Role = loginUser.id_role switch
+    {
+        1 => "Admin",
+        2 => "Comite",
+        3 => "Capturista",
+        _ => "Sin Rol"
+    };
 
     var tokenHandler = new System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler();
     var tokenDescriptor = new SecurityTokenDescriptor
@@ -134,7 +142,7 @@ app.MapPost("/login", async (User user, BENomDbContext db) =>
         Subject = new System.Security.Claims.ClaimsIdentity(new[]
         {
             new System.Security.Claims.Claim("id", loginUser.id.ToString()),
-            new System.Security.Claims.Claim("role", loginUser.id_role.ToString())
+            new System.Security.Claims.Claim("role", Role.ToString())
         }),
         Expires = DateTime.UtcNow.AddHours(1),
         Issuer = jwtIssuer,
@@ -145,20 +153,13 @@ app.MapPost("/login", async (User user, BENomDbContext db) =>
     var token = tokenHandler.CreateToken(tokenDescriptor);
     var tokenString = tokenHandler.WriteToken(token);
 
-    var Role = loginUser.id_role switch
+    return Results.Ok(new
     {
-        1 => "Admin",
-        2 => "Comite",
-        3 => "Capturista",
-        _ => "Sin Rol"
-    };
-    
-    return Results.Ok(new {
         Id = loginUser.id,
         Role,
         Employee_number = loginUser.employee_number,
         Email = loginUser.email,
-        Token = tokenString 
+        Token = tokenString
     });
 });
 
