@@ -2,13 +2,11 @@ using BENom.Data;
 using BENom.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-/* using Microsoft.AspNetCore.Authorization; */ // Descomenta esta linea para proteger con authenticate 
 
 namespace BENom.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    /* [Authorize(Roles = "Admin")] */ // Protege todos los endpoints para usuarios con rol "Admin"
     public class RequestersController : ControllerBase
     {
     private readonly BENomDbContext _context;
@@ -30,12 +28,10 @@ namespace BENom.Controllers
         public async Task<ActionResult<Requester>> GetRequester(int id)
         {
             var requester = await _context.Requesters.FindAsync(id);
-
             if (requester == null)
             {
                 return NotFound();
             }
-
             return requester;
         }
 
@@ -45,7 +41,6 @@ namespace BENom.Controllers
         {
             _context.Requesters.Add(requester);
             await _context.SaveChangesAsync();
-            
             return CreatedAtAction(nameof(GetRequester), new { id = requester.id }, requester);
         }
 
@@ -57,10 +52,8 @@ namespace BENom.Controllers
             {
                 return BadRequest("El ID del objeto no coincide.");
             }
-
             _context.Entry(requester).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-
             return Ok(requester);
         }
 
@@ -69,15 +62,12 @@ namespace BENom.Controllers
         public async Task<IActionResult> DeleteRequester(int id)
         {
             var requester = await _context.Requesters.FindAsync(id);
-
             if (requester == null)
             {
                 return NotFound();
             }
-
             _context.Requesters.Remove(requester);
             await _context.SaveChangesAsync();
-
             return Content("Objeto eliminado");
         }
     }

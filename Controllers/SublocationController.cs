@@ -2,13 +2,11 @@ using BENom.Data;
 using BENom.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-/* using Microsoft.AspNetCore.Authorization; */ // Descomenta esta linea para proteger con authenticate 
 
 namespace BENom.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    /* [Authorize(Roles = "Admin")] */ // Protege todos los endpoints para usuarios con rol "Admin"
     public class SublocationsController : ControllerBase
     {
     private readonly BENomDbContext _context;
@@ -30,12 +28,10 @@ namespace BENom.Controllers
         public async Task<ActionResult<Sublocation>> GetSublocation(int id)
         {
             var sublocation = await _context.Sublocations.FindAsync(id);
-
             if (sublocation == null)
             {
                 return NotFound();
             }
-
             return sublocation;
         }
 
@@ -45,7 +41,6 @@ namespace BENom.Controllers
         {
             _context.Sublocations.Add(sublocation);
             await _context.SaveChangesAsync();
-            
             return CreatedAtAction(nameof(GetSublocation), new { id = sublocation.id }, sublocation);
         }
 
@@ -57,10 +52,8 @@ namespace BENom.Controllers
             {
                 return BadRequest("El ID del objeto no coincide.");
             }
-
             _context.Entry(sublocation).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-
             return Ok(sublocation);
         }
 
@@ -69,15 +62,12 @@ namespace BENom.Controllers
         public async Task<IActionResult> DeleteSublocation(int id)
         {
             var sublocation = await _context.Sublocations.FindAsync(id);
-
             if (sublocation == null)
             {
                 return NotFound();
             }
-
             _context.Sublocations.Remove(sublocation);
             await _context.SaveChangesAsync();
-
             return Content("Objeto eliminado");
         }
     }

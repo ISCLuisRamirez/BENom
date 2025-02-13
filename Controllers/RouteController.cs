@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BENom.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Admin")] // Protege todos los endpoints para usuarios con rol "Admin"
     public class RoutesController : ControllerBase
     {
         private readonly EndpointDataSource _endpointDataSource;

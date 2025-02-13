@@ -2,13 +2,13 @@ using BENom.Data;
 using BENom.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-/* using Microsoft.AspNetCore.Authorization; */ // Descomenta esta linea para proteger con authenticate 
+using Microsoft.AspNetCore.Authorization;
 
 namespace BENom.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    /* [Authorize(Roles = "Admin")] */ // Protege todos los endpoints para usuarios con rol "Admin"
+    [Authorize(Roles = "Admin")] // Protege todos los endpoints para usuarios con rol "Admin"
     public class RolesController : ControllerBase
     {
         private readonly BENomDbContext _context;
@@ -30,12 +30,10 @@ namespace BENom.Controllers
         public async Task<ActionResult<Role>> GetRole(int id)
         {
             var role = await _context.Roles.FindAsync(id);
-
             if (role == null)
             {
                 return NotFound();
             }
-
             return role;
         }
 
@@ -45,7 +43,6 @@ namespace BENom.Controllers
         {
             _context.Roles.Add(role);
             await _context.SaveChangesAsync();
-            
             return CreatedAtAction(nameof(GetRole), new { id = role.id }, role);
         }
 
@@ -57,10 +54,8 @@ namespace BENom.Controllers
             {
                 return BadRequest("El ID del objeto no coincide.");
             }
-
             _context.Entry(role).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-
             return Ok(role);
         }
 
@@ -69,15 +64,12 @@ namespace BENom.Controllers
         public async Task<IActionResult> DeleteRole(int id)
         {
             var role = await _context.Roles.FindAsync(id);
-
             if (role == null)
             {
                 return NotFound();
             }
-
             _context.Roles.Remove(role);
             await _context.SaveChangesAsync();
-
             return Content("Objeto eliminado");
         }
     }

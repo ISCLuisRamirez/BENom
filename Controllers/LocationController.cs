@@ -30,12 +30,10 @@ namespace BENom.Controllers
         public async Task<ActionResult<Location>> GetLocation(int id)
         {
             var location = await _context.Locations.FindAsync(id);
-
             if (location == null)
             {
                 return NotFound();
             }
-
             return location;
         }
 
@@ -45,7 +43,6 @@ namespace BENom.Controllers
         {
             _context.Locations.Add(location);
             await _context.SaveChangesAsync();
-            
             return CreatedAtAction(nameof(GetLocation), new { id = location.id }, location);
         }
 
@@ -57,10 +54,8 @@ namespace BENom.Controllers
             {
                 return BadRequest("El ID del objeto no coincide.");
             }
-
             _context.Entry(location).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-
             return Ok(location);
         }
 
@@ -69,15 +64,12 @@ namespace BENom.Controllers
         public async Task<IActionResult> DeleteLocation(int id)
         {
             var location = await _context.Locations.FindAsync(id);
-
             if (location == null)
             {
                 return NotFound();
             }
-
             _context.Locations.Remove(location);
             await _context.SaveChangesAsync();
-
             return Content("Objeto eliminado");
         }
     }

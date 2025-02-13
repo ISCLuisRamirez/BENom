@@ -2,13 +2,11 @@ using BENom.Data;
 using BENom.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-/* using Microsoft.AspNetCore.Authorization; */ // Descomenta esta linea para proteger con authenticate 
 
 namespace BENom.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    /* [Authorize(Roles = "Admin")] */ // Protege todos los endpoints para usuarios con rol "Admin"
     public class SubjectsController : ControllerBase
     {
     private readonly BENomDbContext _context;
@@ -30,12 +28,10 @@ namespace BENom.Controllers
         public async Task<ActionResult<Subject>> GetSubject(int id)
         {
             var subject = await _context.Subjects.FindAsync(id);
-
             if (subject == null)
             {
                 return NotFound();
             }
-
             return subject;
         }
 
@@ -45,7 +41,6 @@ namespace BENom.Controllers
         {
             _context.Subjects.Add(subject);
             await _context.SaveChangesAsync();
-            
             return CreatedAtAction(nameof(GetSubject), new { id = subject.id }, subject);
         }
 
@@ -57,10 +52,8 @@ namespace BENom.Controllers
             {
                 return BadRequest("El ID del objeto no coincide.");
             }
-
             _context.Entry(subject).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-
             return Ok(subject);
         }
 
@@ -69,15 +62,12 @@ namespace BENom.Controllers
         public async Task<IActionResult> DeleteSubject(int id)
         {
             var subject = await _context.Subjects.FindAsync(id);
-
             if (subject == null)
             {
                 return NotFound();
             }
-
             _context.Subjects.Remove(subject);
             await _context.SaveChangesAsync();
-
             return Content("Objeto eliminado");
         }
     }

@@ -2,13 +2,11 @@ using BENom.Data;
 using BENom.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-/* using Microsoft.AspNetCore.Authorization; */ // Descomenta esta linea para proteger con authenticate 
 
 namespace BENom.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    /* [Authorize(Roles = "Admin")] */ // Protege todos los endpoints para usuarios con rol "Admin"
     public class WitnessesController : ControllerBase
     {
     private readonly BENomDbContext _context;
@@ -30,12 +28,10 @@ namespace BENom.Controllers
         public async Task<ActionResult<Witness>> GetWitness(int id)
         {
             var witness = await _context.Witnesses.FindAsync(id);
-
             if (witness == null)
             {
                 return NotFound();
             }
-
             return witness;
         }
 
@@ -45,7 +41,6 @@ namespace BENom.Controllers
         {
             _context.Witnesses.Add(witness);
             await _context.SaveChangesAsync();
-            
             return CreatedAtAction(nameof(GetWitness), new { id = witness.id }, witness);
         }
 
@@ -57,10 +52,8 @@ namespace BENom.Controllers
             {
                 return BadRequest("El ID del objeto no coincide.");
             }
-
             _context.Entry(witness).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-
             return Ok(witness);
         }
 
@@ -69,15 +62,12 @@ namespace BENom.Controllers
         public async Task<IActionResult> DeleteWitness(int id)
         {
             var witness = await _context.Witnesses.FindAsync(id);
-
             if (witness == null)
             {
                 return NotFound();
             }
-
             _context.Witnesses.Remove(witness);
             await _context.SaveChangesAsync();
-
             return Content("Objeto eliminado");
         }
     }
