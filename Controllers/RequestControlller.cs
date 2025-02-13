@@ -2,6 +2,7 @@ using BENom.Data;
 using BENom.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BENom.Controllers
 {
@@ -18,6 +19,7 @@ namespace BENom.Controllers
 
         // Obtener todos los objetos
         [HttpGet]
+        [Authorize(Roles = "Admin,Comite")]
         public async Task<ActionResult<IEnumerable<Request>>> GetRequests([FromQuery] RequestFiltroDto filtro)
         {
             var query = _context.Requests.AsQueryable();
@@ -57,6 +59,7 @@ namespace BENom.Controllers
 
         // Obtener un objeto por ID
         [HttpGet("search")]
+        [Authorize(Roles = "Admin,Comite,Capturista")]
         public async Task<ActionResult<object>> GetRequestAsync([FromQuery] string folio, [FromQuery] string password, BENomDbContext db)
         {
             var request = await db.Requests.FirstOrDefaultAsync(r => r.folio == folio);
@@ -68,6 +71,7 @@ namespace BENom.Controllers
 
         // Obtener un objeto por ID
         [HttpGet("{id}")]
+        [Authorize(Roles = "Admin,Comite")]
         public async Task<ActionResult<Request>> GetRequest(int id)
         {
             var request = await _context.Requests
@@ -102,6 +106,7 @@ namespace BENom.Controllers
 
         // Actualizar un objeto
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin,Comite,Capturista")]
         public async Task<IActionResult> PutRequest(int id, Request request)
         {
             if (request == null || id != request.id)
@@ -129,6 +134,7 @@ namespace BENom.Controllers
 
         // Eliminar un objeto
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin,Comite")]
         public async Task<IActionResult> DeleteRequest(int id)
         {
             var request = await _context.Requests.FindAsync(id);
@@ -142,6 +148,7 @@ namespace BENom.Controllers
         }
 
         [HttpPatch("{id}/status")]
+        [Authorize(Roles = "Admin,Comite,Capturista")]
         public async Task<IActionResult> UpdateStatus(int id, [FromBody] int newStatus)
         {
             var request = await _context.Requests.FindAsync(id);

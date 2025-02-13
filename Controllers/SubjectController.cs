@@ -2,6 +2,7 @@ using BENom.Data;
 using BENom.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BENom.Controllers
 {
@@ -9,7 +10,7 @@ namespace BENom.Controllers
     [ApiController]
     public class SubjectsController : ControllerBase
     {
-    private readonly BENomDbContext _context;
+        private readonly BENomDbContext _context;
 
         public SubjectsController(BENomDbContext context)
         {
@@ -18,6 +19,7 @@ namespace BENom.Controllers
 
         // Obtener todos los objetos
         [HttpGet]
+        [Authorize(Roles = "Admin,Comite")]
         public async Task<ActionResult<IEnumerable<Subject>>> GetSubject()
         {
             return await _context.Subjects.ToListAsync();
@@ -25,6 +27,7 @@ namespace BENom.Controllers
 
         // Obtener un objeto por ID
         [HttpGet("{id}")]
+        [Authorize(Roles = "Admin,Comite")]
         public async Task<ActionResult<Subject>> GetSubject(int id)
         {
             var subject = await _context.Subjects.FindAsync(id);
@@ -46,6 +49,7 @@ namespace BENom.Controllers
 
         // Actualizar un objeto
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin,Comite")]
         public async Task<IActionResult> PutSubject(int id, Subject subject)
         {
             if (id != subject.id)
@@ -59,6 +63,7 @@ namespace BENom.Controllers
 
         // Eliminar un objeto
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin,Comite")]
         public async Task<IActionResult> DeleteSubject(int id)
         {
             var subject = await _context.Subjects.FindAsync(id);

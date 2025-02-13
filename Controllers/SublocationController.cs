@@ -11,7 +11,7 @@ namespace BENom.Controllers
     [Authorize(Roles = "Admin")]
     public class SublocationsController : ControllerBase
     {
-    private readonly BENomDbContext _context;
+        private readonly BENomDbContext _context;
 
         public SublocationsController(BENomDbContext context)
         {

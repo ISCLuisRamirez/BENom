@@ -8,7 +8,7 @@ namespace BENom.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "Admin")] // Protege todos los endpoints para usuarios con rol "Admin"
+    [Authorize(Roles = "Admin")]
     public class RolesController : ControllerBase
     {
         private readonly BENomDbContext _context;

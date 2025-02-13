@@ -2,11 +2,13 @@ using BENom.Data;
 using BENom.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BENom.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Admin,Comite")]
     public class RequestersController : ControllerBase
     {
     private readonly BENomDbContext _context;

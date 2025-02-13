@@ -2,6 +2,7 @@ using BENom.Data;
 using BENom.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BENom.Controllers
 {
@@ -9,7 +10,7 @@ namespace BENom.Controllers
     [ApiController]
     public class WitnessesController : ControllerBase
     {
-    private readonly BENomDbContext _context;
+        private readonly BENomDbContext _context;
 
         public WitnessesController(BENomDbContext context)
         {
@@ -18,6 +19,7 @@ namespace BENom.Controllers
 
         // Obtener todos los objetos
         [HttpGet]
+        [Authorize(Roles = "Admin,Comite")]
         public async Task<ActionResult<IEnumerable<Witness>>> GetWitnesses()
         {
             return await _context.Witnesses.ToListAsync();
@@ -25,6 +27,7 @@ namespace BENom.Controllers
 
         // Obtener un objeto por ID
         [HttpGet("{id}")]
+        [Authorize(Roles = "Admin,Comite")]
         public async Task<ActionResult<Witness>> GetWitness(int id)
         {
             var witness = await _context.Witnesses.FindAsync(id);
@@ -46,6 +49,7 @@ namespace BENom.Controllers
 
         // Actualizar un objeto
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin,Comite")]
         public async Task<IActionResult> PutWitness(int id, Witness witness)
         {
             if (id != witness.id)
@@ -59,6 +63,7 @@ namespace BENom.Controllers
 
         // Eliminar un objeto
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin,Comite")]
         public async Task<IActionResult> DeleteWitness(int id)
         {
             var witness = await _context.Witnesses.FindAsync(id);
