@@ -8,7 +8,7 @@ namespace BENom.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "Admin,Comite")]
+    
     public class RequestersController : ControllerBase
     {
     private readonly BENomDbContext _context;
@@ -20,6 +20,7 @@ namespace BENom.Controllers
 
         // Obtener todos los objetos
         [HttpGet]
+        [Authorize(Roles = "Admin,Comite")]
         public async Task<ActionResult<IEnumerable<Requester>>> GetRequesters()
         {
             return await _context.Requesters.ToListAsync();
@@ -27,6 +28,7 @@ namespace BENom.Controllers
 
         // Obtener un objeto por ID
         [HttpGet("{id}")]
+        [Authorize(Roles = "Admin,Comite")]
         public async Task<ActionResult<Requester>> GetRequester(int id)
         {
             var requester = await _context.Requesters.FindAsync(id);
@@ -48,6 +50,7 @@ namespace BENom.Controllers
 
         // Actualizar un objeto
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin,Comite")]
         public async Task<IActionResult> PutRequester(int id, Requester requester)
         {
             if (id != requester.id)
@@ -61,6 +64,7 @@ namespace BENom.Controllers
 
         // Eliminar un objeto
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin,Comite")]
         public async Task<IActionResult> DeleteRequester(int id)
         {
             var requester = await _context.Requesters.FindAsync(id);
