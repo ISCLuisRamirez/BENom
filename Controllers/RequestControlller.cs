@@ -92,7 +92,7 @@ namespace BENom.Controllers
             request.folio = Folio;
             string Password = PassGenerator(6);
             request.password = BCrypt.Net.BCrypt.HashPassword(Password);
-            request.created_date = DateOnly.FromDateTime(DateTime.Now);;
+            request.created_date = DateOnly.FromDateTime(DateTime.Now); ;
 
             _context.Requests.Add(request);
             await _context.SaveChangesAsync();
@@ -167,6 +167,35 @@ namespace BENom.Controllers
                 return StatusCode(500, "Error al actualizar el estado: " + ex.Message);
             }
         }
+
+        [HttpGet("counter")]
+        [Authorize(Roles = "Admin,Comite")]
+        public async Task<ActionResult<object>> GetRequestCountByStatus()
+        {
+            var counts = await _context.Requests
+                .GroupBy(r => r.status)
+                .Select(g => new
+                {
+                    Status = g.Key,
+                    Count = g.Count()
+                })
+                .ToListAsync();
+            int totalRequests = await _context.Requests.CountAsync();
+            var statusMap = new Dictionary<int, string>
+            {
+                { 1, "En proceso" },
+                { 2, "Abiertas" },
+                { 3, "Cerradas" }
+            };
+            var result = new
+            {
+                total = totalRequests,
+                count = counts.Select(c => c.Count).ToList(),
+                status = counts.Select(c => statusMap.ContainsKey(c.Status) ? statusMap[c.Status] : "Desconocido").ToList()
+            };
+            return Ok(result);
+        }
+
 
         static string FolioGenerator()
         {
