@@ -19,12 +19,6 @@ namespace BENom.Controllers
         }
 
         // Obtener todos los objetos
-        [HttpGet]
-        [Authorize(Roles = "Admin,Comite")]
-        public async Task<ActionResult<IEnumerable<Requester>>> GetRequesters()
-        {
-            return await _context.Requesters.ToListAsync();
-        }
 
         [HttpGet]
         [Authorize(Roles = "Admin,Comite")]
