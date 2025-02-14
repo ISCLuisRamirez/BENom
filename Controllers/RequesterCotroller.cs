@@ -26,6 +26,23 @@ namespace BENom.Controllers
             return await _context.Requesters.ToListAsync();
         }
 
+        [HttpGet]
+        [Authorize(Roles = "Admin,Comite")]
+        public async Task<ActionResult<IEnumerable<Requester>>> GetRequesters([FromQuery] int? id_request)
+        {
+            var query = _context.Requesters.AsQueryable();
+            if (id_request.HasValue)
+            {
+                query = query.Where(r => r.id_request == id_request.Value);
+            }
+            var requesters = await query.ToListAsync();
+            if (!requesters.Any())
+            {
+                return NotFound();
+            }
+            return Ok(requesters);
+        }
+
         // Obtener un objeto por ID
         [HttpGet("{id}")]
         [Authorize(Roles = "Admin,Comite")]
