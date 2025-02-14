@@ -17,12 +17,21 @@ namespace BENom.Controllers
             _context = context;
         }
 
-        // Obtener todos los objetos
         [HttpGet]
         [Authorize(Roles = "Admin,Comite")]
-        public async Task<ActionResult<IEnumerable<Subject>>> GetSubject()
+        public async Task<ActionResult<IEnumerable<Subject>>> GetSubjects([FromQuery] int? id_request)
         {
-            return await _context.Subjects.ToListAsync();
+            var query = _context.Subjects.AsQueryable();
+            if (id_request.HasValue)
+            {
+                query = query.Where(s => s.id_request == id_request.Value);
+            }
+            var subjects = await query.ToListAsync();
+            if (!subjects.Any())
+            {
+                return NotFound();
+            }
+            return Ok(subjects);
         }
 
         // Obtener un objeto por ID

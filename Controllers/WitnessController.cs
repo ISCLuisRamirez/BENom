@@ -20,10 +20,21 @@ namespace BENom.Controllers
         // Obtener todos los objetos
         [HttpGet]
         [Authorize(Roles = "Admin,Comite")]
-        public async Task<ActionResult<IEnumerable<Witness>>> GetWitnesses()
+        public async Task<ActionResult<IEnumerable<Witness>>> GetWitnesses([FromQuery] int? id_request)
         {
-            return await _context.Witnesses.ToListAsync();
+            var query = _context.Witnesses.AsQueryable();
+            if (id_request.HasValue)
+            {
+                query = query.Where(w => w.id_request == id_request.Value);
+            }
+            var witnesses = await query.ToListAsync();
+            if (!witnesses.Any())
+            {
+                return NotFound();
+            }
+            return Ok(witnesses);
         }
+
 
         // Obtener un objeto por ID
         [HttpGet("{id}")]
