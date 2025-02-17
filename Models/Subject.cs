@@ -11,7 +11,4 @@ public class Subject
     public string? position { get; set; }
     [StringLength(6, ErrorMessage = "El número de empleado no puede exceder los 6 caracteres.")]
     public string? employee_number { get; set; }
-    [StringLength(10, ErrorMessage = "El teléfono no puede exceder los 10 caracteres.")]
-    public string? phone { get; set; }
-    public string? email { get; set; }
 }
