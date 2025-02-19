@@ -60,7 +60,6 @@ namespace BENom.Controllers
 
         // Obtener un objeto por ID
         [HttpGet("search")]
-        [Authorize(Roles = "Admin,Comite,Capturista")]
         public async Task<ActionResult<object>> GetRequestAsync([FromQuery] string folio, [FromQuery] string password, BENomDbContext db)
         {
             var request = await db.Requests.FirstOrDefaultAsync(r => r.folio == folio);
