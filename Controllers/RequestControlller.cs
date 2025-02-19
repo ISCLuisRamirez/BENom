@@ -3,6 +3,7 @@ using BENom.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace BENom.Controllers
 {
@@ -152,11 +153,28 @@ namespace BENom.Controllers
         public async Task<IActionResult> UpdateStatus(int id, [FromBody] int newStatus)
         {
             var request = await _context.Requests.FindAsync(id);
-            if (request == null)
+            if (request == null || (newStatus != 2 && newStatus != 3))
             {
                 return NotFound("No se encontró la solicitud con el ID especificado.");
             }
             request.status = newStatus;
+            var userId = User.FindFirst("id")?.Value;
+            if (newStatus == 2)
+            {
+                if (int.TryParse(userId, out int parsedUserId))
+                {
+                    request.id_user_updated = parsedUserId;
+                }
+                request.updated_date = DateOnly.FromDateTime(DateTime.UtcNow);
+            }
+            else
+            {
+                if (int.TryParse(userId, out int parsedUserId))
+                {
+                    request.id_user_closed = parsedUserId;
+                }
+                request.closed_date = DateOnly.FromDateTime(DateTime.UtcNow);
+            }
             try
             {
                 await _context.SaveChangesAsync();
