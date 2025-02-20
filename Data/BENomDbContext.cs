@@ -16,6 +16,7 @@ public class BENomDbContext : DbContext
     public DbSet<Requester> Requesters { get; set; }
     public DbSet<Subject> Subjects { get; set; }
     public DbSet<Reason> Reasons { get; set; }
+    public DbSet<File> Files { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
