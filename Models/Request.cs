@@ -19,6 +19,7 @@ public class Request
     public string? folio { get; set; } = string.Empty;
     public string? password { get; set; } = string.Empty;
     public string? description { get; set; } = string.Empty;
+    public string? reported { get; set; }
     public int status { get; set; }
     public DateOnly? date { get; set; }
     public DateOnly created_date { get; set; }
