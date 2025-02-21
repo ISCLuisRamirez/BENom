@@ -21,9 +21,11 @@ namespace BENom.Controllers
         // Obtener todos los objetos
         [HttpGet]
         [Authorize(Roles = "Admin,Comite")]
-        public async Task<ActionResult<IEnumerable<Request>>> GetRequests([FromQuery] RequestFiltroDto filtro)
+        public async Task<ActionResult> GetRequests([FromQuery] RequestFiltroDto filtro)
         {
             var query = _context.Requests.AsQueryable();
+
+            // Aplicar filtros
             if (filtro.IdReason.HasValue)
                 query = query.Where(r => r.id_reason == filtro.IdReason.Value);
             if (filtro.IdLocation.HasValue)
@@ -38,25 +40,32 @@ namespace BENom.Controllers
                 query = query.Where(r => r.status == filtro.Status.Value);
             if (!string.IsNullOrEmpty(filtro.Folio))
                 query = query.Where(r => r.folio.Contains(filtro.Folio));
+
+            // Ordenamiento
             var ordenarPor = filtro.OrdenarPor ?? "id";
             bool ordenDesc = filtro.OrdenDesc;
             query = ordenDesc
                 ? query.OrderByDescending(e => EF.Property<object>(e, ordenarPor))
                 : query.OrderBy(e => EF.Property<object>(e, ordenarPor));
+
+            // Paginación
             int totalRegistros = await query.CountAsync();
             var requests = await query
                 .Skip((filtro.Pagina - 1) * filtro.TamanoPagina)
                 .Take(filtro.TamanoPagina)
                 .ToListAsync();
+
+            // **🚨 Asegurar que la respuesta tenga "Datos" como array**
             return Ok(new
             {
                 TotalRegistros = totalRegistros,
                 PaginaActual = filtro.Pagina,
                 TamanoPagina = filtro.TamanoPagina,
                 TotalPaginas = (int)Math.Ceiling((double)totalRegistros / filtro.TamanoPagina),
-                Datos = requests
+                Datos = requests // ✅ Asegurar que esto es una lista y no null
             });
         }
+
 
         // Obtener un objeto por ID
         [HttpGet("search")]

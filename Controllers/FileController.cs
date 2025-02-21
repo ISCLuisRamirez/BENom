@@ -17,7 +17,7 @@ public class FilesController : ControllerBase
     }
 
     [HttpPost("upload")]
-    public async Task<IActionResult> UploadFile([FromForm] IFormFile file)
+    public async Task<IActionResult> UploadFile([FromForm] IFormFile file, int id_request)
     {
         if (file == null || file.Length == 0)
             return BadRequest("No se proporcionó un archivo válido.");
@@ -30,7 +30,8 @@ public class FilesController : ControllerBase
             file_name = file.FileName,
             content_type = file.ContentType,
             file_data = memoryStream.ToArray(),
-            upload_date = DateTime.UtcNow
+            upload_date = DateTime.UtcNow,
+            id_request = id_request
         };
 
         _context.Files.Add(fileModel);
