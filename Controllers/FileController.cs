@@ -17,10 +17,17 @@ public class FilesController : ControllerBase
     }
 
     [HttpPost("upload")]
-    public async Task<IActionResult> UploadFile([FromForm] IFormFile file, int id_request)
+    public async Task<IActionResult> UploadFile([FromForm] IFormFile file)
     {
         if (file == null || file.Length == 0)
             return BadRequest("No se proporcionó un archivo válido.");
+
+        // Extraer el valor de id_request del FormData y convertirlo a entero
+        string idRequestString = Request.Form["id_request"];
+        if (!int.TryParse(idRequestString, out int id_request))
+        {
+            return BadRequest("El valor de id_request no es un entero válido.");
+        }
 
         using var memoryStream = new MemoryStream();
         await file.CopyToAsync(memoryStream);
