@@ -1,25 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\celina_guzman\\OneDrive - CORPORATIVO FRAGUA\\Escritorio\\BENom\\BENom.csproj": {}
+    "C:\\Users\\jose_arambul\\Proyectos\\NOM\\BENom\\BENom.csproj": {}
   },
   "projects": {
-    "C:\\Users\\celina_guzman\\OneDrive - CORPORATIVO FRAGUA\\Escritorio\\BENom\\BENom.csproj": {
+    "C:\\Users\\jose_arambul\\Proyectos\\NOM\\BENom\\BENom.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\celina_guzman\\OneDrive - CORPORATIVO FRAGUA\\Escritorio\\BENom\\BENom.csproj",
+        "projectUniqueName": "C:\\Users\\jose_arambul\\Proyectos\\NOM\\BENom\\BENom.csproj",
         "projectName": "BENom",
-        "projectPath": "C:\\Users\\celina_guzman\\OneDrive - CORPORATIVO FRAGUA\\Escritorio\\BENom\\BENom.csproj",
-        "packagesPath": "C:\\Users\\celina_guzman\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\celina_guzman\\OneDrive - CORPORATIVO FRAGUA\\Escritorio\\BENom\\obj\\",
+        "projectPath": "C:\\Users\\jose_arambul\\Proyectos\\NOM\\BENom\\BENom.csproj",
+        "packagesPath": "C:\\Users\\jose_arambul\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jose_arambul\\Proyectos\\NOM\\BENom\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\celina_guzman\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\jose_arambul\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

@@ -55,14 +55,13 @@ namespace BENom.Controllers
                 .Take(filtro.TamanoPagina)
                 .ToListAsync();
 
-            // **🚨 Asegurar que la respuesta tenga "Datos" como array**
             return Ok(new
             {
                 TotalRegistros = totalRegistros,
                 PaginaActual = filtro.Pagina,
                 TamanoPagina = filtro.TamanoPagina,
                 TotalPaginas = (int)Math.Ceiling((double)totalRegistros / filtro.TamanoPagina),
-                Datos = requests // ✅ Asegurar que esto es una lista y no null
+                Datos = requests
             });
         }
 

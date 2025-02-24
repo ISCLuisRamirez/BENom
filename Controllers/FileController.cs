@@ -57,4 +57,31 @@ public class FilesController : ControllerBase
 
         return File(file.file_data, file.content_type, file.file_name);
     }
+
+    [HttpGet("get/{id_request}")]
+    [Authorize(Roles = "Admin,Comite")]
+    public async Task<IActionResult> GetFilesByRequest(int id_request)
+    {
+        // Consulta todos los archivos que tengan el id_request especificado
+        var files = await _context.Files
+                                  .Where(f => f.id_request == id_request)
+                                  .ToListAsync();
+
+        if (files == null || !files.Any())
+        {
+            return NotFound("No se encontraron archivos para el id_request proporcionado.");
+        }
+
+        // Retornamos la metadata de los archivos encontrados
+        var result = files.Select(file => new
+        {
+            file.id,
+            file.file_name,
+            file.content_type,
+            file.upload_date
+            // Puedes incluir otros campos si es necesario.
+        });
+
+        return Ok(result);
+    }
 }
