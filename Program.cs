@@ -142,7 +142,8 @@ app.MapPost("/login", async (User user, BENomDbContext db) =>
         Subject = new System.Security.Claims.ClaimsIdentity(new[]
         {
             new System.Security.Claims.Claim("id", loginUser.id.ToString()),
-            new System.Security.Claims.Claim("role", Role.ToString())
+            new System.Security.Claims.Claim("role", Role),
+            new System.Security.Claims.Claim("id_department", loginUser.id_department.ToString()) // ✅ Agregamos id_department
         }),
         Expires = DateTime.UtcNow.AddHours(1),
         Issuer = jwtIssuer,
@@ -159,8 +160,10 @@ app.MapPost("/login", async (User user, BENomDbContext db) =>
         Role,
         Employee_number = loginUser.employee_number,
         Email = loginUser.email,
+        Id_department = loginUser.id_department,
         Token = tokenString
     });
 });
+
 
 app.Run();

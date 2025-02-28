@@ -23,9 +23,39 @@ namespace BENom.Controllers
         [Authorize(Roles = "Admin,Comite")]
         public async Task<ActionResult> GetRequests([FromQuery] RequestFiltroDto filtro)
         {
+            var idDepartmentClaim = User.FindFirst("id_department");
+
+            if (idDepartmentClaim == null)
+            {
+                return BadRequest("El usuario no tiene un ID de departamento asignado.");
+            }
+
+            // Convertir el valor del claim a entero
+            if (!int.TryParse(idDepartmentClaim.Value, out int idDepartment))
+            {
+                return BadRequest($"El ID del departamento no es válido: {idDepartmentClaim.Value}");
+            }
+
+            // Obtener los ID de requests que ya están en Witnesses
+            var existingWitnessesDeparmentsIds = await _context.Witnesses
+                .Where(w => w.id_department == idDepartment)
+                .Select(w => w.id_request)
+                .ToListAsync();
+                
+            var existingSubjectsDeparmentsIds = await _context.Subjects
+                .Where(s => s.id_department == idDepartment)
+                .Select(s => s.id_request)
+                .ToListAsync();
+
             var query = _context.Requests.AsQueryable();
 
+            // Excluir las requests que ya están en Witnesses
+            query = query.Where(r => !existingWitnessesDeparmentsIds.Contains(r.id));
+            query = query.Where(r => !existingSubjectsDeparmentsIds.Contains(r.id));
+
             // Aplicar filtros
+            if (filtro.Pagina <= 0) filtro.Pagina = 1; // Default to page 1
+            if (filtro.TamanoPagina <= 0) filtro.TamanoPagina = 10; // Default page size to 10
             if (filtro.IdReason.HasValue)
                 query = query.Where(r => r.id_reason == filtro.IdReason.Value);
             if (filtro.IdLocation.HasValue)
@@ -64,7 +94,6 @@ namespace BENom.Controllers
                 Datos = requests
             });
         }
-
 
         // Obtener un objeto por ID
         [HttpGet("search")]
