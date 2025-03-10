@@ -1,7 +1,9 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BENom.Models;
 
+[Table("requesters")]
 public class Requester
 {
     public int id { get; set; }

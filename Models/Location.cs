@@ -1,7 +1,9 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BENom.Models;
 
+[Table("locations")]
 public class Location
 {
     public int id { get; set; }
