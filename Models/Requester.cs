@@ -11,7 +11,7 @@ public class Requester
     public string name { get; set; }
     [StringLength(100, ErrorMessage = "El campo nombre no puede exceder los 100 caracteres.")]
     public string? position { get; set; }
-    [StringLength(6, ErrorMessage = "El número de empleado no puede exceder los 6 caracteres.")]
+    [StringLength(8, ErrorMessage = "El número de empleado no puede exceder los 8 caracteres.")]
     public string? employee_number { get; set; }
     [StringLength(10, ErrorMessage = "El teléfono no puede exceder los 10 caracteres.")]
     public string? phone { get; set; }
