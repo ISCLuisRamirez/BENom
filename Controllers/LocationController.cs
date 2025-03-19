@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace BENom.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     [Authorize(Roles = "Admin")]
     public class LocationsController : ControllerBase

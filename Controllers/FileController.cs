@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.IO;
 using BENom.Data;
 
-[Route("api/files")]
+[Route("files")]
 [ApiController]
 public class FilesController : ControllerBase
 {

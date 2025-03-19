@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
-[Route("api/email")]
+[Route("email")]
 [ApiController]
 public class EmailController : ControllerBase
 {

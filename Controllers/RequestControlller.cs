@@ -7,7 +7,7 @@ using System.Security.Claims;
 
 namespace BENom.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class RequestsController : ControllerBase
     {
@@ -112,7 +112,7 @@ namespace BENom.Controllers
         public async Task<ActionResult<Request>> GetRequest(int id)
         {
             var request = await _context.Requests
-                .FromSqlRaw("SELECT * FROM Requests WHERE Id = {0} AND Status != 'Eliminado'", id)
+                .FromSqlRaw("SELECT * FROM requests WHERE Id = {0} AND Status != 'Eliminado'", id)
                 .FirstOrDefaultAsync();
             if (request == null)
             {
