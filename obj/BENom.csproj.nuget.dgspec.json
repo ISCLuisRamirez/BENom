@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Cguzman_admin\\Desktop\\BENom\\BENom.csproj": {}
+    "C:\\Users\\jose_arambul\\Proyectos\\NOM\\BENom\\BENom.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Cguzman_admin\\Desktop\\BENom\\BENom.csproj": {
+    "C:\\Users\\jose_arambul\\Proyectos\\NOM\\BENom\\BENom.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Cguzman_admin\\Desktop\\BENom\\BENom.csproj",
+        "projectUniqueName": "C:\\Users\\jose_arambul\\Proyectos\\NOM\\BENom\\BENom.csproj",
         "projectName": "BENom",
-        "projectPath": "C:\\Users\\Cguzman_admin\\Desktop\\BENom\\BENom.csproj",
-        "packagesPath": "C:\\Users\\Cguzman_admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Cguzman_admin\\Desktop\\BENom\\obj\\",
+        "projectPath": "C:\\Users\\jose_arambul\\Proyectos\\NOM\\BENom\\BENom.csproj",
+        "packagesPath": "C:\\Users\\jose_arambul\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\jose_arambul\\Proyectos\\NOM\\BENom\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Cguzman_admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\jose_arambul\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -44,7 +44,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.200"
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
         "net9.0": {
@@ -118,7 +118,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
