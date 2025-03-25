@@ -41,7 +41,7 @@ namespace BENom.Controllers
                 .Where(w => w.id_department == idDepartment)
                 .Select(w => w.id_request)
                 .ToListAsync();
-                
+
             var existingSubjectsDeparmentsIds = await _context.Subjects
                 .Where(s => s.id_department == idDepartment)
                 .Select(s => s.id_request)
@@ -112,13 +112,42 @@ namespace BENom.Controllers
         public async Task<ActionResult<Request>> GetRequest(int id)
         {
             var request = await _context.Requests
-                .FromSqlRaw("SELECT * FROM requests WHERE Id = {0} AND Status != 'Eliminado'", id)
+                .Where(r => r.id == id)
                 .FirstOrDefaultAsync();
+
             if (request == null)
             {
                 return NotFound();
             }
-            return request;
+
+            var userUpdated = await _context.Users
+                .Where(u => u.id == request.id_user_updated)
+                .FirstOrDefaultAsync();
+
+            var userClosed = await _context.Users
+                .Where(u => u.id == request.id_user_closed)
+                .FirstOrDefaultAsync();
+
+            var result = new
+            {
+                request.id,
+                request.status,
+                request.folio,
+                request.password,
+                request.created_date,
+                request.id_reason,
+                request.id_location,
+                request.id_sublocation,
+                request.date,
+                request.updated_date,
+                request.closed_date,
+                request.id_user_updated,
+                request.id_user_closed,
+                employee_number_user_updated = userUpdated?.employee_number,
+                employee_number_user_closed = userClosed?.employee_number
+            };
+
+            return Ok(result);
         }
 
         // Crear un nuevo objeto
