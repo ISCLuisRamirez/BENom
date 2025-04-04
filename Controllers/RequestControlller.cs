@@ -172,7 +172,7 @@ namespace BENom.Controllers
 
         // Actualizar un objeto
         [HttpPut("{id}")]
-        [Authorize(Roles = "Admin,Comite,Capturista")]
+        [Authorize(Roles = "Admin,Comite")]
         public async Task<IActionResult> PutRequest(int id, Request request)
         {
             if (request == null || id != request.id)
@@ -214,7 +214,7 @@ namespace BENom.Controllers
         }
 
         [HttpPatch("{id}/status")]
-        [Authorize(Roles = "Admin,Comite,Capturista")]
+        [Authorize(Roles = "Admin,Comite")]
         public async Task<IActionResult> UpdateStatus(int id, [FromBody] int newStatus)
         {
             var request = await _context.Requests.FindAsync(id);
