@@ -269,9 +269,10 @@ namespace BENom.Controllers
             int totalRequests = await _context.Requests.CountAsync();
             var statusMap = new Dictionary<int, string>
             {
-                { 1, "En proceso" },
-                { 2, "Abiertas" },
-                { 3, "Cerradas" }
+                { 1, "Registrado" },
+                { 2, "En Proceso" },
+                { 3, "Finalizado" },
+                { 3, "Rechazado" },
             };
             var result = new
             {
