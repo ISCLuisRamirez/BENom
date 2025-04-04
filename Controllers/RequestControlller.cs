@@ -218,7 +218,10 @@ namespace BENom.Controllers
         public async Task<IActionResult> UpdateStatus(int id, [FromBody] int newStatus)
         {
             var request = await _context.Requests.FindAsync(id);
-            if (request == null || (newStatus != 2 && newStatus != 3))
+            if (request == null || (newStatus != 2 && newStatus != 3 && newStatus != 4))
+            {
+                return BadRequest("El ID de la solicitud no es válido o el nuevo estado no es válido.");
+            }
             {
                 return NotFound("No se encontró la solicitud con el ID especificado.");
             }
