@@ -272,7 +272,7 @@ namespace BENom.Controllers
                 { 1, "Registrado" },
                 { 2, "En Proceso" },
                 { 3, "Finalizado" },
-                { 3, "Rechazado" }
+                { 4, "Rechazado" }
             };
             var result = new
             {
