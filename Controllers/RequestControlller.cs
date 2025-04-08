@@ -222,9 +222,6 @@ namespace BENom.Controllers
             {
                 return BadRequest("El ID de la solicitud no es válido o el nuevo estado no es válido.");
             }
-            {
-                return NotFound("No se encontró la solicitud con el ID especificado.");
-            }
             request.status = newStatus;
             var userId = User.FindFirst("id")?.Value;
             if (newStatus == 2)
