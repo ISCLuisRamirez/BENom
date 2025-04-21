@@ -18,14 +18,12 @@ namespace BENom.Controllers
             _context = context;
         }
 
-        // Obtener todos los objetos
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Sublocation>>> GetSublocation()
         {
             return await _context.Sublocations.ToListAsync();
         }
 
-        // Obtener un objeto por ID
         [HttpGet("{id}")]
         public async Task<ActionResult<Sublocation>> GetSublocation(int id)
         {
@@ -37,7 +35,6 @@ namespace BENom.Controllers
             return sublocation;
         }
 
-        // Crear un nuevo objeto
         [HttpPost]
         public async Task<ActionResult<Sublocation>> PostSublocation(Sublocation sublocation)
         {
@@ -46,7 +43,6 @@ namespace BENom.Controllers
             return CreatedAtAction(nameof(GetSublocation), new { id = sublocation.id }, sublocation);
         }
 
-        // Actualizar un objeto
         [HttpPut("{id}")]
         public async Task<IActionResult> PutSublocation(int id, Sublocation sublocation)
         {
@@ -59,7 +55,6 @@ namespace BENom.Controllers
             return Ok(sublocation);
         }
 
-        // Eliminar un objeto
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteSublocation(int id)
         {

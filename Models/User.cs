@@ -12,5 +12,5 @@ public class User
     [StringLength(8, ErrorMessage = "El numero de empleado no puede exceder los 8 caracteres.")]
     public string employee_number { get; set; }
     public string email { get; set; }
-    public string password { get; set; } // Contraseña encriptada
+    public string password { get; set; }
 }

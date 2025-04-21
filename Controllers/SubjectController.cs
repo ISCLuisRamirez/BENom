@@ -34,7 +34,6 @@ namespace BENom.Controllers
             return Ok(subjects);
         }
 
-        // Obtener un objeto por ID
         [HttpGet("{id}")]
         [Authorize(Roles = "Admin,Comite")]
         public async Task<ActionResult<Subject>> GetSubject(int id)
@@ -47,7 +46,6 @@ namespace BENom.Controllers
             return subject;
         }
 
-        // Crear un nuevo objeto
         [HttpPost]
         public async Task<ActionResult<Subject>> PostSubject(Subject subject)
         {
@@ -56,7 +54,6 @@ namespace BENom.Controllers
             return CreatedAtAction(nameof(GetSubject), new { id = subject.id }, subject);
         }
 
-        // Actualizar un objeto
         [HttpPut("{id}")]
         [Authorize(Roles = "Admin,Comite")]
         public async Task<IActionResult> PutSubject(int id, Subject subject)
@@ -70,7 +67,6 @@ namespace BENom.Controllers
             return Ok(subject);
         }
 
-        // Eliminar un objeto
         [HttpDelete("{id}")]
         [Authorize(Roles = "Admin,Comite")]
         public async Task<IActionResult> DeleteSubject(int id)

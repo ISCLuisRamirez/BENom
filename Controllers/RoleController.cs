@@ -18,14 +18,12 @@ namespace BENom.Controllers
             _context = context;
         }
 
-        // Obtener todos los roles
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Role>>> GetRoles()
         {
             return await _context.Roles.ToListAsync();
         }
 
-        // Obtener un rol por ID
         [HttpGet("{id}")]
         public async Task<ActionResult<Role>> GetRole(int id)
         {
@@ -37,7 +35,6 @@ namespace BENom.Controllers
             return role;
         }
 
-        // Crear un nuevo rol
         [HttpPost]
         public async Task<ActionResult<Role>> PostRole(Role role)
         {
@@ -46,7 +43,6 @@ namespace BENom.Controllers
             return CreatedAtAction(nameof(GetRole), new { id = role.id }, role);
         }
 
-        // Actualizar un rol
         [HttpPut("{id}")]
         public async Task<IActionResult> PutRole(int id, Role role)
         {
@@ -59,7 +55,6 @@ namespace BENom.Controllers
             return Ok(role);
         }
 
-        // Eliminar un rol
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteRole(int id)
         {

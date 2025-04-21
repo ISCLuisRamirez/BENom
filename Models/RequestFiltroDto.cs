@@ -9,8 +9,8 @@ public class RequestFiltroDto
     public byte? Status { get; set; }
     public string? Folio { get; set; }
 
-    public string? OrdenarPor { get; set; } = "id"; // Campo para ordenar
-    public bool OrdenDesc { get; set; } = true; // Indica si el orden es descendente
+    public string? OrdenarPor { get; set; } = "id";
+    public bool OrdenDesc { get; set; } = false;
 
     public int Pagina { get; set; } = 1;
     public int TamanoPagina { get; set; } = 10;

@@ -17,7 +17,6 @@ namespace BENom.Controllers
             _context = context;
         }
 
-        // Obtener todos los objetos
         [HttpGet]
         [Authorize(Roles = "Admin,Comite")]
         public async Task<ActionResult<IEnumerable<Witness>>> GetWitnesses([FromQuery] int? id_request)
@@ -35,8 +34,6 @@ namespace BENom.Controllers
             return Ok(witnesses);
         }
 
-
-        // Obtener un objeto por ID
         [HttpGet("{id}")]
         [Authorize(Roles = "Admin,Comite")]
         public async Task<ActionResult<Witness>> GetWitness(int id)
@@ -49,7 +46,6 @@ namespace BENom.Controllers
             return witness;
         }
 
-        // Crear un nuevo objeto
         [HttpPost]
         public async Task<ActionResult<Witness>> PostWitness(Witness witness)
         {
@@ -58,7 +54,6 @@ namespace BENom.Controllers
             return CreatedAtAction(nameof(GetWitness), new { id = witness.id }, witness);
         }
 
-        // Actualizar un objeto
         [HttpPut("{id}")]
         [Authorize(Roles = "Admin,Comite")]
         public async Task<IActionResult> PutWitness(int id, Witness witness)
@@ -72,7 +67,6 @@ namespace BENom.Controllers
             return Ok(witness);
         }
 
-        // Eliminar un objeto
         [HttpDelete("{id}")]
         [Authorize(Roles = "Admin,Comite")]
         public async Task<IActionResult> DeleteWitness(int id)

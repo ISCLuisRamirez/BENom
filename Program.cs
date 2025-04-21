@@ -24,7 +24,6 @@ builder.Services.AddCors(options =>
     });
 });
 
-// Configuración de la base de datos MySQL
 builder.Services.AddDbContext<BENomDbContext>(options =>
     options.UseMySql(
         builder.Configuration.GetConnectionString("DefaultConnection"),
@@ -33,7 +32,6 @@ builder.Services.AddDbContext<BENomDbContext>(options =>
 builder.Services.AddAuthorization();
 builder.Services.AddControllers();
 
-// Configuración de JWT
 var jwtKey = builder.Configuration["Jwt:Key"];
 var jwtIssuer = builder.Configuration["Jwt:Issuer"];
 var key = Encoding.ASCII.GetBytes(jwtKey);
@@ -64,13 +62,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// Habilitar CORS
 app.UseCors("AllowAll");
 
 app.UseAuthentication();
 app.UseAuthorization();
 
-// Migrar la base de datos
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<BENomDbContext>();
@@ -79,7 +75,6 @@ using (var scope = app.Services.CreateScope())
 
 app.MapControllers();
 
-// Endpoint para registrar usuarios
 app.MapPost("/register", async (User user, BENomDbContext db) =>
 {
     if (await db.Users.AnyAsync(u => u.employee_number == user.employee_number))
@@ -120,7 +115,6 @@ app.MapPost("/register", async (User user, BENomDbContext db) =>
     return Results.Ok(new string("ok"));
 }); */
 
-// Endpoint para autenticar usuarios
 app.MapPost("/login", async (User user, BENomDbContext db) =>
 {
     var loginUser = await db.Users.FirstOrDefaultAsync(u => u.employee_number == user.employee_number);

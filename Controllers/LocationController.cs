@@ -18,14 +18,12 @@ namespace BENom.Controllers
             _context = context;
         }
 
-        // Obtener todos los objetos
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Location>>> GetLocations()
         {
             return await _context.Locations.ToListAsync();
         }
 
-        // Obtener un objeto por ID
         [HttpGet("{id}")]
         public async Task<ActionResult<Location>> GetLocation(int id)
         {
@@ -37,7 +35,6 @@ namespace BENom.Controllers
             return location;
         }
 
-        // Crear un nuevo objeto
         [HttpPost]
         public async Task<ActionResult<Location>> PostLocation(Location location)
         {
@@ -46,7 +43,6 @@ namespace BENom.Controllers
             return CreatedAtAction(nameof(GetLocation), new { id = location.id }, location);
         }
 
-        // Actualizar un objeto
         [HttpPut("{id}")]
         public async Task<IActionResult> PutLocation(int id, Location location)
         {
@@ -59,7 +55,6 @@ namespace BENom.Controllers
             return Ok(location);
         }
 
-        // Eliminar un objeto
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteLocation(int id)
         {

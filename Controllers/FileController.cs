@@ -22,7 +22,6 @@ public class FilesController : ControllerBase
         if (file == null || file.Length == 0)
             return BadRequest("No se proporcionó un archivo válido.");
 
-        // Extraer el valor de id_request del FormData y convertirlo a entero
         string idRequestString = Request.Form["id_request"];
         if (!int.TryParse(idRequestString, out int id_request))
         {
@@ -62,7 +61,6 @@ public class FilesController : ControllerBase
     [Authorize(Roles = "Admin,Comite")]
     public async Task<IActionResult> GetFilesByRequest(int id_request)
     {
-        // Consulta todos los archivos que tengan el id_request especificado
         var files = await _context.Files
                                   .Where(f => f.id_request == id_request)
                                   .ToListAsync();
@@ -72,14 +70,12 @@ public class FilesController : ControllerBase
             return NotFound("No se encontraron archivos para el id_request proporcionado.");
         }
 
-        // Retornamos la metadata de los archivos encontrados
         var result = files.Select(file => new
         {
             file.id,
             file.file_name,
             file.content_type,
             file.upload_date
-            // Puedes incluir otros campos si es necesario.
         });
 
         return Ok(result);
