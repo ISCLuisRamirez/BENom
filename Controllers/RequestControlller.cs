@@ -268,68 +268,68 @@ namespace BENom.Controllers
         }
 
         [HttpGet("excel")]
-[Authorize(Roles = "Admin,Comite")]
-public async Task<ActionResult<object>> GetRequestExcel()
-{
-    var folios = await _context.Requests
-        .SelectMany(
-            request => _context.Vias
-                .Where(via => via.id == request.id_via)
-                .DefaultIfEmpty(),
-            (request, via) => new { request, via }
-        )
-        .SelectMany(
-            temp => _context.Locations
-                .Where(location => location.id == temp.request.id_location)
-                .DefaultIfEmpty(),
-            (temp, location) => new { temp.request, temp.via, location }
-        )
-        .SelectMany(
-            temp => _context.Sublocations
-                .Where(sublocation => sublocation.id == temp.request.id_sublocation)
-                .DefaultIfEmpty(),
-            (temp, sublocation) => new { temp.request, temp.via, temp.location, sublocation }
-        )
-        .SelectMany(
-            temp => _context.Reasons
-                .Where(reason => reason.id == temp.request.id_reason)
-                .DefaultIfEmpty(),
-            (temp, reason) => new
-            {
-                temp.request.folio,
-                descripcion = temp.request.description,
-                estatus = temp.request.status == 1 ? "Registrado" :
-                          temp.request.status == 2 ? "En proceso" :
-                          temp.request.status == 3 ? "Finalizado" :
-                          temp.request.status == 4 ? "Rechazado" : "Desconocido",
-                fecha_creacion = temp.request.created_date,
-                medio = temp.via != null ? temp.via.name : null,
-                razon = reason != null ? reason.reason_name : null,
-                ubicacion = temp.location != null ? temp.location.location_name : null,
-                sububicacion = temp.sublocation != null ? temp.sublocation.sublocation_name : null,
-                fecha_o_periodo = temp.request.date != null
-                    ? temp.request.date.ToString()
-                    : (temp.request.period != null
-                        ? temp.request.period
-                        : "No aplica"),
-                implicados = _context.Subjects
-                    .Where(subject => subject.id_request == temp.request.id)
-                    .Select(subject => new { nombre = subject.name, puesto = subject.position })
-                    .ToList(),
-                testigos = _context.Witnesses
-                    .Where(witness => witness.id_request == temp.request.id)
-                    .Select(witness => new { nombre = witness.name, puesto = witness.position })
-                    .ToList(),
-            }
-        )
-        .ToListAsync();
+        [Authorize(Roles = "Admin,Comite")]
+        public async Task<ActionResult<object>> GetRequestExcel()
+        {
+            var folios = await _context.Requests
+                .SelectMany(
+                    request => _context.Vias
+                        .Where(via => via.id == request.id_via)
+                        .DefaultIfEmpty(),
+                    (request, via) => new { request, via }
+                )
+                .SelectMany(
+                    temp => _context.Locations
+                        .Where(location => location.id == temp.request.id_location)
+                        .DefaultIfEmpty(),
+                    (temp, location) => new { temp.request, temp.via, location }
+                )
+                .SelectMany(
+                    temp => _context.Sublocations
+                        .Where(sublocation => sublocation.id == temp.request.id_sublocation)
+                        .DefaultIfEmpty(),
+                    (temp, sublocation) => new { temp.request, temp.via, temp.location, sublocation }
+                )
+                .SelectMany(
+                    temp => _context.Reasons
+                        .Where(reason => reason.id == temp.request.id_reason)
+                        .DefaultIfEmpty(),
+                    (temp, reason) => new
+                    {
+                        temp.request.folio,
+                        descripcion = temp.request.description,
+                        estatus = temp.request.status == 1 ? "Registrado" :
+                                  temp.request.status == 2 ? "En proceso" :
+                                  temp.request.status == 3 ? "Finalizado" :
+                                  temp.request.status == 4 ? "Rechazado" : "Desconocido",
+                        fecha_creacion = temp.request.created_date,
+                        medio = temp.via != null ? temp.via.name : null,
+                        razon = reason != null ? reason.reason_name : null,
+                        ubicacion = temp.location != null ? temp.location.location_name : null,
+                        sububicacion = temp.sublocation != null ? temp.sublocation.sublocation_name : null,
+                        fecha_o_periodo = temp.request.date != null
+                            ? temp.request.date.ToString()
+                            : (temp.request.period != null
+                                ? temp.request.period
+                                : "No aplica"),
+                        implicados = _context.Subjects
+                            .Where(subject => subject.id_request == temp.request.id)
+                            .Select(subject => new { nombre = subject.name, puesto = subject.position })
+                            .ToList(),
+                        testigos = _context.Witnesses
+                            .Where(witness => witness.id_request == temp.request.id)
+                            .Select(witness => new { nombre = witness.name, puesto = witness.position })
+                            .ToList(),
+                    }
+                )
+                .ToListAsync();
 
-    return Ok(new
-    {
-        TotalRegistros = folios.Count,
-        Datos = folios
-    });
-}
+            return Ok(new
+            {
+                TotalRegistros = folios.Count,
+                Datos = folios
+            });
+        }
 
         static string FolioGenerator()
         {
