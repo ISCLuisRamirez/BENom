@@ -1,2 +1,4 @@
 appsettings.json
+appsettings.Development.json
 /obj/Debug/net9.0
+/bin
