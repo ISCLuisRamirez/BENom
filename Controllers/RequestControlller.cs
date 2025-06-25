@@ -123,22 +123,26 @@ namespace BENom.Controllers
             var result = new
             {
                 request.id,
-                request.status,
-                request.folio,
-                request.password,
-                request.created_date,
+                request.id_via,
                 request.id_reason,
                 request.id_location,
-                request.id_sublocation,
-                request.date,
-                request.updated_date,
-                request.closed_date,
-                request.id_user_updated,
                 request.id_user_closed,
+                request.id_sublocation,
+                request.id_user_updated,
+                request.date,
+                request.folio,
+                request.status,
+                request.period,
+                request.reported,
+                request.password,
                 request.via_detail,
                 request.description,
-                employee_number_user_updated = userUpdated?.employee_number,
-                employee_number_user_closed = userClosed?.employee_number
+                request.name_sublocation,
+                request.closed_date,
+                request.created_date,
+                request.updated_date,
+                employee_number_user_closed = userClosed?.employee_number,
+                employee_number_user_updated = userUpdated?.employee_number
             };
 
             return Ok(result);
