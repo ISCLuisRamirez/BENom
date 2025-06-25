@@ -135,6 +135,8 @@ namespace BENom.Controllers
                 request.closed_date,
                 request.id_user_updated,
                 request.id_user_closed,
+                request.via_detail,
+                request.description,
                 employee_number_user_updated = userUpdated?.employee_number,
                 employee_number_user_closed = userClosed?.employee_number
             };

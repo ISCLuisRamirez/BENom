@@ -4,16 +4,14 @@ C:\Users\jose_arambul\Proyectos\NOM\BENom\bin\Release\net9.0\publish\publish-fil
 C:\Users\jose_arambul\Proyectos\NOM\BENom\bin\Release\net9.0\publish\appsettings.Development.json
 C:\Users\jose_arambul\Proyectos\NOM\BENom\bin\Release\net9.0\publish\appsettings.json
 C:\Users\jose_arambul\Proyectos\NOM\BENom\bin\Release\net9.0\publish\publish-files\appsettings.Development.json
-C:\Users\jose_arambul\Proyectos\NOM\BENom\bin\Release\net9.0\publish\publish-files\appsettings.json
 C:\Users\jose_arambul\Proyectos\NOM\BENom\bin\Release\net9.0\publish\publish-files\BENom.deps.json
 C:\Users\jose_arambul\Proyectos\NOM\BENom\bin\Release\net9.0\publish\publish-files\BENom.runtimeconfig.json
 C:\Users\jose_arambul\Proyectos\NOM\BENom\bin\Release\net9.0\publish\publish-files\BENom.staticwebassets.endpoints.json
 C:\Users\jose_arambul\Proyectos\NOM\BENom\bin\Release\net9.0\publish\publish-files\publish-files\appsettings.Development.json
-C:\Users\jose_arambul\Proyectos\NOM\BENom\bin\Release\net9.0\publish\publish-files\publish-files\appsettings.json
 C:\Users\jose_arambul\Proyectos\NOM\BENom\bin\Release\net9.0\publish\publish-files\publish-files\BENom.deps.json
 C:\Users\jose_arambul\Proyectos\NOM\BENom\bin\Release\net9.0\publish\publish-files\publish-files\BENom.runtimeconfig.json
 C:\Users\jose_arambul\Proyectos\NOM\BENom\bin\Release\net9.0\publish\publish-files\publish-files\BENom.staticwebassets.endpoints.json
-C:\Users\jose_arambul\Proyectos\NOM\BENom\bin\Release\net9.0\publish\publish-files\publish-files\publish-files\appsettings.json
+C:\Users\jose_arambul\Proyectos\NOM\BENom\bin\Release\net9.0\publish\publish\appsettings.json
 C:\Users\jose_arambul\Proyectos\NOM\BENom\bin\Release\net9.0\publish\BENom.dll
 C:\Users\jose_arambul\Proyectos\NOM\BENom\bin\Release\net9.0\publish\BENom.runtimeconfig.json
 C:\Users\jose_arambul\Proyectos\NOM\BENom\bin\Release\net9.0\publish\BENom.pdb
