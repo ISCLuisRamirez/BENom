@@ -1,0 +1,16 @@
+{
+  "ConnectionStrings": {
+      "DefaultConnection": "server=YOURSERVER;port=3306;database=YOURDATABASE;user=YOURUSER;password=YOURPASSWORD"
+  },
+  "Jwt": {
+      "Key": "YOUR_SECRET_KEY",
+      "Issuer": "YOUR_ISSUER"
+  },
+  "Logging": {
+      "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+      }
+  },
+  "AllowedHosts": "*"
+}
