@@ -35,19 +35,20 @@ namespace BENom.Controllers
                 return BadRequest($"El ID del departamento no es válido: {idDepartmentClaim.Value}");
             }
 
-            var existingWitnessesDeparmentsIds = await _context.Witnesses
-                .Where(w => w.id_department == idDepartment)
-                .Select(w => w.id_request)
-                .ToListAsync();
-
-            var existingSubjectsDeparmentsIds = await _context.Subjects
-                .Where(s => s.id_department == idDepartment)
-                .Select(s => s.id_request)
-                .ToListAsync();
-
             var query = _context.Requests.AsQueryable();
+            
             if (idDepartment != 1 && idDepartment != 12)
             {
+                var existingWitnessesDeparmentsIds = await _context.Witnesses
+                    .Where(w => w.id_department == idDepartment)
+                    .Select(w => w.id_request)
+                    .ToListAsync();
+
+                var existingSubjectsDeparmentsIds = await _context.Subjects
+                    .Where(s => s.id_department == idDepartment)
+                    .Select(s => s.id_request)
+                    .ToListAsync();
+
                 query = query.Where(r => !existingWitnessesDeparmentsIds.Contains(r.id));
                 query = query.Where(r => !existingSubjectsDeparmentsIds.Contains(r.id));
             }
