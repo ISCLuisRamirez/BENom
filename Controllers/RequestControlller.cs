@@ -46,9 +46,11 @@ namespace BENom.Controllers
                 .ToListAsync();
 
             var query = _context.Requests.AsQueryable();
-
-            query = query.Where(r => !existingWitnessesDeparmentsIds.Contains(r.id));
-            query = query.Where(r => !existingSubjectsDeparmentsIds.Contains(r.id));
+            if (idDepartment != 1 && idDepartment != 12)
+            {
+                query = query.Where(r => !existingWitnessesDeparmentsIds.Contains(r.id));
+                query = query.Where(r => !existingSubjectsDeparmentsIds.Contains(r.id));
+            }
 
             if (filtro.Pagina <= 0) filtro.Pagina = 1;
             if (filtro.TamanoPagina <= 0) filtro.TamanoPagina = 10;
