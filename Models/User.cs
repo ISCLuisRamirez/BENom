@@ -10,7 +10,7 @@ public class User
     public int id_role { get; set; }
     public int id_department {get; set;}
     [StringLength(8, ErrorMessage = "El numero de empleado no puede exceder los 8 caracteres.")]
-    public string employee_number { get; set; }
-    public string email { get; set; }
-    public string password { get; set; }
+    public required string employee_number { get; set; }
+    public required string email { get; set; }
+    public required string password { get; set; }
 }

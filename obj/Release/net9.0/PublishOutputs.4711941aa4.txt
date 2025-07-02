@@ -3,6 +3,7 @@ C:\Users\jose_arambul\Proyectos\NOM\BENom\bin\Release\net9.0\publish\publish-fil
 C:\Users\jose_arambul\Proyectos\NOM\BENom\bin\Release\net9.0\publish\publish-files\web.config
 C:\Users\jose_arambul\Proyectos\NOM\BENom\bin\Release\net9.0\publish\appsettings.Development.json
 C:\Users\jose_arambul\Proyectos\NOM\BENom\bin\Release\net9.0\publish\appsettings.json
+C:\Users\jose_arambul\Proyectos\NOM\BENom\bin\Release\net9.0\publish\example.appsettings.Development.json
 C:\Users\jose_arambul\Proyectos\NOM\BENom\bin\Release\net9.0\publish\publish-files\appsettings.Development.json
 C:\Users\jose_arambul\Proyectos\NOM\BENom\bin\Release\net9.0\publish\publish-files\BENom.deps.json
 C:\Users\jose_arambul\Proyectos\NOM\BENom\bin\Release\net9.0\publish\publish-files\BENom.runtimeconfig.json

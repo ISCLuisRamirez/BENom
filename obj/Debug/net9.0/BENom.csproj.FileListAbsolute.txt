@@ -327,3 +327,4 @@ C:\Users\jose_arambul\Proyectos\NOM\BENom\bin\Debug\net9.0\publish-files\publish
 C:\Users\jose_arambul\Proyectos\NOM\BENom\bin\Debug\net9.0\publish-files\publish-files\BENom.runtimeconfig.json
 C:\Users\jose_arambul\Proyectos\NOM\BENom\bin\Debug\net9.0\publish-files\publish-files\BENom.staticwebassets.endpoints.json
 C:\Users\jose_arambul\Proyectos\NOM\BENom\bin\Debug\net9.0\publish\appsettings.json
+C:\Users\jose_arambul\Proyectos\NOM\BENom\bin\Debug\net9.0\example.appsettings.Development.json
