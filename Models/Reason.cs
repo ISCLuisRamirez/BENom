@@ -7,6 +7,6 @@ namespace BENom.Models;
 public class Reason
 {
     public int id { get; set; }
-    [StringLength(100, ErrorMessage = "El campo nombre no puede exceder los 100 caracteres.")]
+    [StringLength(150, ErrorMessage = "El campo nombre no puede exceder los 150 caracteres.")]
     public required string reason_name { get; set; }
 }

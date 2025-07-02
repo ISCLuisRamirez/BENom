@@ -14,8 +14,9 @@ public class Request
     public int? id_user_updated { get; set; }
     public int? id_user_closed { get; set; }
     public int? id_via { get; set; }
-    [StringLength(100, ErrorMessage = "El nombre de sububicación no puede exceder los 100 caracteres.")]
+    [StringLength(150, ErrorMessage = "El nombre de sububicación no puede exceder los 150 caracteres.")]
     public string? name_sublocation { get; set; }
+    [StringLength(150, ErrorMessage = "El nombre de medio de contacto no puede exceder los 150 caracteres.")]
     public string? via_detail { get; set; }
     public string? period { get; set; }
     public string? folio { get; set; } = string.Empty;

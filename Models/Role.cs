@@ -7,6 +7,6 @@ namespace BENom.Models;
 public class Role
 {
     public int id { get; set; }
-    [StringLength(100, ErrorMessage = "El campo nombre no puede exceder los 100 caracteres.")]
+    [StringLength(50, ErrorMessage = "El campo nombre no puede exceder los 50 caracteres.")]
     public required string role_name { get; set; }
 }
