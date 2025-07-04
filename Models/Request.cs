@@ -18,6 +18,7 @@ public class Request
     public string? name_sublocation { get; set; }
     [StringLength(150, ErrorMessage = "El nombre de medio de contacto no puede exceder los 150 caracteres.")]
     public string? via_detail { get; set; }
+    [StringLength(100, ErrorMessage = "El periodo no puede exceder los 100 caracteres.")]
     public string? period { get; set; }
     public string? folio { get; set; } = string.Empty;
     public string? password { get; set; } = string.Empty;
